@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raiza · Club de Mate — No vendemos mates, creamos rituales.</title>
+<meta name="description" content="Raiza · Club de Mate. Mates artesanales, rancheros de algarrobo, bombillas, yerba y sets. Hechos a mano, con raíz. Envíos a todo el país.">
+<meta property="og:title" content="Raiza · Club de Mate">
+<meta property="og:description" content="No vendemos mates, creamos rituales. Llegamos. Somos RAIZA.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #241610; }
+  * { box-sizing: border-box; }
+  a { color: #EDE4D6; text-decoration: none; }
+  a:hover { color: #ffffff; }
+  ::selection { background: #8A5A34; color: #EDE4D6; }
+  img { max-width: 100%; display: block; }
+  button { font-family: 'Inter', sans-serif; }
+  @keyframes raiza-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes raiza-bounce { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(7px); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    [data-bg] { transform: none !important; }
+  }
+  /* image-slot placeholder (shown when a product photo file is not present yet) */
+  .slot { position: absolute; inset: 0; overflow: hidden; }
+  .slot img { width: 100%; height: 100%; object-fit: cover; }
+  .slot img.contain { object-fit: contain; }
+  .slot .ph { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 18px; gap: 10px; background:
+      radial-gradient(120% 120% at 50% 0%, rgba(237,228,214,0.10), transparent 60%), #C2B4A0; color: #4A3016; }
+  .slot .ph svg { opacity: 0.55; }
+  .slot .ph span { font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; line-height: 1.3; color: #4A3016; }
+  .slot.empty .ph { display: flex; }
+</style>
+</head>
+<body>
+
+<div id="app" style="position: relative; min-height: 100vh; width: 100%; overflow-x: hidden; background: #2E1D12; font-family: 'Inter', sans-serif; color: #EDE4D6;">
+
+  <!-- FIXED WOOD BACKGROUND -->
+  <div style="position: fixed; inset: 0; z-index: 0; overflow: hidden;">
+    <div id="bg" data-bg style="position: absolute; inset: -8%; will-change: transform;">
+      <img src="uploads/wood_bg-1785206107583.png" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(36,22,16,0.68), rgba(36,22,16,0.92));"></div>
+  </div>
+
+  <div style="position: relative; z-index: 1;">
+
+  <!-- NAVBAR -->
+  <nav id="nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease; border-bottom: 1px solid rgba(237,228,214,0); background: rgba(36,22,16,0);">
+    <div style="max-width: 84rem; margin: 0 auto; padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
+      <a href="#top" style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 44px; height: 44px; border-radius: 9999px; overflow: hidden; flex: none; background: #241610; box-shadow: 0 0 0 1px rgba(237,228,214,0.15); position: relative;">
+          <span class="slot"><img src="uploads/logo-1785205984582.JPG" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>Raiza</span></span></span>
+        </div>
+        <span style="font-family: 'Fraunces', serif; font-size: 19px; color: #EDE4D6; letter-spacing: 0.01em;">Raiza</span>
+      </a>
+      <div id="navlinks" style="display: none; gap: 34px; align-items: center;"></div>
+      <a id="wa-top-nav" href="#" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px; background: #8A5A34; color: #EDE4D6; font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600; padding: 12px 22px; transition: background 0.3s ease, transform 0.2s ease; white-space: nowrap;" onmouseenter="waHover(this,1)" onmouseleave="waHover(this,0)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span>Pedí por WhatsApp</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="top" style="position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden;">
+    <div style="max-width: 42rem; padding: 128px 32px 80px; width: 100%;">
+      <div data-anim="0" style="display: inline-block;">
+        <div style="width: 96px; height: 96px; border-radius: 9999px; overflow: hidden; background: #241610; box-shadow: 0 0 0 1px rgba(237,228,214,0.18), 0 20px 50px rgba(0,0,0,0.4); animation: raiza-float 4s ease-in-out infinite; position: relative;">
+          <span class="slot"><img src="uploads/logo-1785205984582.JPG" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>Raiza</span></span></span>
+        </div>
+      </div>
+      <h1 data-anim="1" style="font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -0.01em; color: #EDE4D6; margin: 28px 0 0;">No vendemos mates,<br><span style="background: linear-gradient(135deg, #B9A78E, #8A5A34); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic;">creamos rituales.</span></h1>
+      <p data-anim="2" style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(1.1rem, 2.5vw, 1.75rem); color: rgba(237,228,214,0.8); margin: 20px 0 0;">Llegamos. Somos RAIZA.</p>
+      <div data-anim="3" id="chips" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0;"></div>
+      <div data-anim="4" style="display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0 0;">
+        <a href="#catalogo" style="display: inline-flex; align-items: center; gap: 9px; background: #8A5A34; color: #EDE4D6; padding: 15px 30px; border-radius: 9999px; font-size: 15px; font-weight: 500; transition: background 0.3s ease, transform 0.2s ease;" onmouseenter="waHover(this,1)" onmouseleave="waHover(this,0)">
+          Ver catálogo
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a id="wa-top-hero" href="#" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(237,228,214,0.25); color: #EDE4D6; padding: 15px 30px; border-radius: 9999px; font-size: 15px; font-weight: 500; transition: background 0.3s ease;" onmouseenter="this.style.background='rgba(237,228,214,0.06)'" onmouseleave="this.style.background='transparent'">
+          Comprar por WhatsApp
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div style="position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px;">
+      <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(237,228,214,0.55);">Deslizá</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(237,228,214,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: raiza-bounce 1.8s ease-in-out infinite;"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" style="background: #B9A78E; color: #241610; border-radius: 48px 48px 0 0; margin-top: -24px; position: relative;">
+    <div data-reveal style="max-width: 84rem; margin: 0 auto; padding: 112px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 56px; align-items: center;">
+      <div>
+        <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: #6E4526; margin-bottom: 16px;">Sobre Raiza</div>
+        <h2 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05; margin: 0 0 24px;">Más que un mate, un punto de encuentro.</h2>
+        <p style="font-size: 17px; line-height: 1.8; color: rgba(36,22,16,0.82); margin: 0;">Raiza nació de una idea simple: el mate no es solo una bebida, es un ritual que nos une. Elegimos cada pieza a mano — calabazas, algarrobo, cuero y alpaca — para que cada ronda tenga identidad y arraigo. Somos una comunidad matera, y esta es tu invitación a sumarte.</p>
+      </div>
+      <div data-parallax style="border-radius: 20px; overflow: hidden; aspect-ratio: 4/5; box-shadow: 0 30px 60px rgba(36,22,16,0.25); position: relative; background: #C2B4A0;">
+        <span class="slot"><img src="uploads/nosotros_img-1785206174085.JPG" alt="Ronda de mate Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#4A3016" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Raiza · Nosotros</span></span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ ELEGIRNOS -->
+  <section style="background: #241610; padding: 100px 32px;">
+    <div data-reveal id="features" style="max-width: 84rem; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 20px;"></div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <section id="catalogo" style="background: #B9A78E; color: #241610; padding: 100px 32px;">
+    <div style="max-width: 84rem; margin: 0 auto;">
+      <div data-reveal style="text-align: center; margin-bottom: 40px;">
+        <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: #6E4526; margin-bottom: 14px;">Catálogo</div>
+        <h2 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 5vw, 3.6rem); margin: 0;">Elegí tu ritual.</h2>
+      </div>
+      <div id="tabs" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 44px;"></div>
+      <div id="products" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 24px;"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section style="background: #241610; padding: 100px 32px;">
+    <div data-reveal id="testimonials" style="max-width: 84rem; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 22px;"></div>
+  </section>
+
+  <!-- INSTAGRAM / COMUNIDAD -->
+  <section style="background: #B9A78E; color: #241610; padding: 100px 32px;">
+    <div data-reveal style="max-width: 72rem; margin: 0 auto; text-align: center;">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: #6E4526; margin-bottom: 14px;">Comunidad</div>
+      <h2 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 5vw, 3.4rem); margin: 0 0 14px;">Sumate al club matero.</h2>
+      <p style="font-size: 16px; color: rgba(36,22,16,0.7); margin: 0 auto 40px; max-width: 32rem;">Seguinos, compartí tu ronda y sé parte de Raiza.</p>
+      <div id="ig" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 40px;"></div>
+      <a href="https://instagram.com/raizaclubdemate" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; background: #241610; color: #EDE4D6; border-radius: 9999px; padding: 15px 30px; font-size: 15px; font-weight: 500; transition: transform 0.2s ease, background 0.3s ease;" onmouseenter="this.style.transform='scale(1.03)';this.style.background='#000'" onmouseleave="this.style.transform='scale(1)';this.style.background='#241610'">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        @raizaclubdemate
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACTO / CTA FINAL -->
+  <section id="contacto" style="background: #241610; padding: 128px 32px; position: relative; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background: radial-gradient(700px circle at 50% 0%, rgba(138,90,52,0.25), transparent 65%);"></div>
+    <div data-reveal style="position: relative; max-width: 44rem; margin: 0 auto; text-align: center;">
+      <div style="width: 56px; height: 56px; border-radius: 9999px; overflow: hidden; margin: 0 auto 24px; background: #241610; box-shadow: 0 0 0 1px rgba(237,228,214,0.18); position: relative;">
+        <span class="slot"><img src="uploads/logo-1785205984582.JPG" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>Raiza</span></span></span>
+      </div>
+      <h2 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 5vw, 3.5rem); color: #EDE4D6; margin: 0 0 14px;">¿Listo para tu próxima ronda?</h2>
+      <p style="font-size: 17px; color: rgba(237,228,214,0.7); margin: 0 0 34px;">Escribinos y armamos tu mate ideal.</p>
+      <a id="wa-final" href="#" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; background: #8A5A34; color: #EDE4D6; border-radius: 9999px; padding: 17px 34px; font-size: 16px; font-weight: 500; transition: background 0.3s ease, transform 0.2s ease;" onmouseenter="waHover(this,1)" onmouseleave="waHover(this,0)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Hablá con nosotros por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background: #1B0F0A; border-top: 1px solid rgba(237,228,214,0.1); padding: 30px 28px;">
+    <div style="max-width: 84rem; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 38px; height: 38px; border-radius: 9999px; overflow: hidden; background: #241610; box-shadow: 0 0 0 1px rgba(237,228,214,0.15); position: relative;">
+          <span class="slot"><img src="uploads/logo-1785205984582.JPG" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>R</span></span></span>
+        </div>
+        <span style="font-size: 13px; color: rgba(237,228,214,0.6);">© 2025 Raiza · Club de Mate</span>
+      </div>
+      <div style="display: flex; gap: 26px; font-size: 13px;">
+        <a href="#catalogo" style="color: rgba(237,228,214,0.7);">Catálogo</a>
+        <a href="https://instagram.com/raizaclubdemate" target="_blank" rel="noopener" style="color: rgba(237,228,214,0.7);">Instagram</a>
+        <a id="wa-footer" href="#" target="_blank" rel="noopener" style="color: rgba(237,228,214,0.7);">WhatsApp</a>
+      </div>
+    </div>
+    <div style="max-width: 84rem; margin: 18px auto 0; font-size: 12px; color: rgba(237,228,214,0.4); text-align: center;">Hecho con raíz. 🧉</div>
+  </footer>
+
+  </div>
+</div>
+
+<script>
+// ============================================================================
+// Raiza · Club de Mate — landing materializada desde el diseño de Claude.
+// Reemplazá el número de WhatsApp abajo si cambia (código de país + número).
+// ============================================================================
+var WA = "5493834021235"; // 54 (Argentina) + 9 (móvil) + 383 402 1235
+
+function wa(text) {
+  var base = "https://wa.me/" + WA;
+  return text ? base + "?text=" + encodeURIComponent(text) : base;
+}
+function fmt(n) { return "$" + n.toLocaleString("es-AR"); }
+function el(tag, attrs, html) {
+  var e = document.createElement(tag);
+  if (attrs) for (var k in attrs) e.setAttribute(k, attrs[k]);
+  if (html != null) e.innerHTML = html;
+  return e;
+}
+function waHover(node, on) {
+  var bg = node.getAttribute("data-basebg") || "#8A5A34";
+  node.style.background = on ? "#6E4526" : bg;
+  node.style.transform = on ? "scale(1.03)" : "scale(1)";
+}
+function slotHtml(file, fit, placeholder) {
+  var cls = fit === "contain" ? "contain" : "";
+  if (!file) {
+    return '<span class="slot empty"><span class="ph">' + phInner(placeholder) + '</span></span>';
+  }
+  var src = "uploads/" + encodeURIComponent(file);
+  return '<span class="slot"><img class="' + cls + '" src="' + src + '" alt="' +
+    (placeholder || "").replace(/"/g, "&quot;") + '" loading="lazy" ' +
+    'onerror="this.parentNode.classList.add(\'empty\')">' +
+    '<span class="ph">' + phInner(placeholder) + '</span></span>';
+}
+function phInner(label) {
+  return '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4A3016" stroke-width="1.4">' +
+    '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
+    '<span>' + (label || "") + '</span>';
+}
+
+// ---- WhatsApp links ----
+document.getElementById("wa-top-nav").href = wa("Hola Raiza! Quiero hacer una consulta 🧉");
+document.getElementById("wa-top-hero").href = wa("Hola Raiza! Quiero hacer una consulta 🧉");
+document.getElementById("wa-final").href = wa("Hola Raiza! Quiero hacer una consulta 🧉");
+document.getElementById("wa-footer").href = wa("Hola Raiza! Quiero hacer una consulta 🧉");
+
+// ---- Nav links ----
+var navItems = [
+  { label: "Inicio", href: "#top" },
+  { label: "Catálogo", href: "#catalogo" },
+  { label: "Nosotros", href: "#nosotros" },
+  { label: "Contacto", href: "#contacto" }
+];
+var navWrap = document.getElementById("navlinks");
+navItems.forEach(function (n) {
+  var a = el("a", { href: n.href, style: "font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(237,228,214,0.7); transition: color 0.3s ease;" }, n.label);
+  a.onmouseenter = function () { a.style.color = "#ffffff"; };
+  a.onmouseleave = function () { a.style.color = "rgba(237,228,214,0.7)"; };
+  navWrap.appendChild(a);
+});
+
+// ---- Chips ----
+["ritual", "autenticidad", "identidad", "arraigo", "zona de calma"].forEach(function (c) {
+  document.getElementById("chips").appendChild(
+    el("span", { style: "font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(237,228,214,0.7); border: 1px solid rgba(237,228,214,0.15); border-radius: 9999px; padding: 6px 13px;" }, c)
+  );
+});
+
+// ---- Features ----
+var icons = {
+  hammer: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6l4 4"/><path d="M3 21l8-8"/><path d="M11.5 6.5l6 6 3-3a2.8 2.8 0 0 0 0-4 2.8 2.8 0 0 0-4 0z"/><path d="M6 10l4 4"/></svg>',
+  gem: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M8 3l-2 6 6 12 6-12-2-6"/></svg>',
+  truck: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h13v9H1z"/><path d="M14 9h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
+  users: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>'
+};
+[
+  { icon: "hammer", title: "Hecho a mano", desc: "Cada pieza, artesanal y única." },
+  { icon: "gem", title: "Materiales nobles", desc: "Calabaza, algarrobo, cuero y alpaca." },
+  { icon: "truck", title: "Envíos a todo el país", desc: "Tu mate llega a donde estés." },
+  { icon: "users", title: "Comunidad matera", desc: "Sumate al club, no solo a la compra." }
+].forEach(function (f) {
+  document.getElementById("features").appendChild(el("div",
+    { style: "background: rgba(237,228,214,0.04); border: 1px solid rgba(237,228,214,0.1); border-radius: 18px; padding: 26px;" },
+    '<div style="width: 46px; height: 46px; border-radius: 9999px; background: #8A5A34; display: flex; align-items: center; justify-content: center; color: #EDE4D6; margin-bottom: 18px;">' + icons[f.icon] + '</div>' +
+    '<div style="font-family: \'Fraunces\', serif; font-size: 20px; color: #EDE4D6; margin-bottom: 8px;">' + f.title + '</div>' +
+    '<div style="font-size: 14px; line-height: 1.6; color: rgba(237,228,214,0.6);">' + f.desc + '</div>'
+  ));
+});
+
+// ---- Testimonials ----
+[
+  { quote: "El Ranchero Sasha es una obra de arte. Se nota que está hecho a mano.", initial: "J", name: "Julián", city: "Córdoba" },
+  { quote: "Llegó rapidísimo y mejor de lo que esperaba. Ya es parte de mis mañanas.", initial: "B", name: "Ma. Belén", city: "Rosario" },
+  { quote: "Más que una compra, se siente como entrar a un club. Atención de diez.", initial: "N", name: "Nicolás", city: "Mendoza" }
+].forEach(function (t) {
+  var stars = "";
+  for (var i = 0; i < 5; i++) stars += '<svg width="16" height="16" viewBox="0 0 24 24" fill="#8A5A34" stroke="none"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg>';
+  document.getElementById("testimonials").appendChild(el("figure",
+    { style: "background: rgba(237,228,214,0.04); border: 1px solid rgba(237,228,214,0.1); border-radius: 18px; padding: 30px; margin: 0;" },
+    '<div style="display: flex; gap: 3px; margin-bottom: 16px;">' + stars + '</div>' +
+    '<blockquote style="font-size: 17px; line-height: 1.65; color: rgba(237,228,214,0.85); margin: 0 0 22px; font-family: \'Fraunces\', serif; font-style: italic;">' + t.quote + '</blockquote>' +
+    '<figcaption style="display: flex; align-items: center; gap: 12px;">' +
+      '<div style="width: 40px; height: 40px; border-radius: 9999px; background: linear-gradient(135deg, #B9A78E, #8A5A34); display: flex; align-items: center; justify-content: center; font-weight: 600; color: #241610; font-size: 15px;">' + t.initial + '</div>' +
+      '<div><div style="font-size: 14px; color: #EDE4D6; font-weight: 500;">' + t.name + '</div>' +
+      '<div style="font-size: 12px; color: rgba(237,228,214,0.55);">' + t.city + '</div></div>' +
+    '</figcaption>'
+  ));
+});
+
+// ---- Instagram tiles ----
+var igFiles = ["ig_images-1785207047989.JPG", "", "", "", "", ""];
+var igWrap = document.getElementById("ig");
+igFiles.forEach(function (file) {
+  var a = el("a", { href: "https://instagram.com/raizaclubdemate", target: "_blank", rel: "noopener", style: "position: relative; display: block; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; background: #C2B4A0;" },
+    slotHtml(file, "cover", "Instagram") +
+    '<span data-ig style="position: absolute; inset: 0; background: rgba(138,90,52,0); display: flex; align-items: center; justify-content: center; transition: background 0.3s ease;">' +
+      '<svg data-igicon width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#EDE4D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 0.3s ease;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>' +
+    '</span>');
+  a.onmouseenter = function () { a.querySelector("[data-ig]").style.background = "rgba(138,90,52,0.55)"; a.querySelector("[data-igicon]").style.opacity = "1"; };
+  a.onmouseleave = function () { a.querySelector("[data-ig]").style.background = "rgba(138,90,52,0)"; a.querySelector("[data-igicon]").style.opacity = "0"; };
+  igWrap.appendChild(a);
+});
+
+// ============================================================================
+// CATÁLOGO
+// ============================================================================
+var PRODUCTS = [
+  // MATES CLÁSICOS
+  { cat: "Mates Clásicos", img: "torpedo clasico.JPG", name: "Mate Torpedo Clásico", price: 42000, specs: "100% Calabaza · Virola de Alpaca Cincelada · Cuero Liso · Negro" },
+  { cat: "Mates Clásicos", img: "imperial clasico.JPG", name: "Mate Imperial Clásico", price: 39800, specs: "100% Calabaza · Fleje de acero · Virola de Alpaca · Cuero Liso · Negro" },
+  { cat: "Mates Clásicos", img: "imperial crudo.JPG", name: "Mate Imperial Crudo", price: 59800, specs: "100% Calabaza · Virola de Alpaca · Cuero Liso · Crudo" },
+  { cat: "Mates Clásicos", img: "torpedo base bolita.JPG", name: "Torpedo con Base de Bolita", price: 72100, specs: "100% Calabaza · Virola de Alpaca Cincelada · Base de Alpaca · Cuero Liso · Negro" },
+  { cat: "Mates Clásicos", img: "mate criollo.JPG", name: "Mate Criollo", price: 20100, specs: "Calabaza · Base de cuero cosida a mano" },
+  { cat: "Mates Clásicos", img: "porito con base de cuero.JPG", name: "Torpedo Porito con Base de Cuero", price: 20100, specs: "Calabaza porito · Base de cuero" },
+  { cat: "Mates Clásicos", img: "galleta.JPG", name: "Mate Galleta", price: 35000, specs: "Calabaza galleta · Base de cuero con broches" },
+  { cat: "Mates Clásicos", img: "camionero mundial.JPG", name: "Camionero Edición Copa Mundial '26", price: 50000, specs: "Edición Argentina · Celeste y blanco con sol" },
+  { cat: "Mates Clásicos", img: "criollo diselo de autor.JPG", name: "Criollo Diseño de Autor", price: 45100, specs: "Calabaza · Base de cuero pintada a mano" },
+  { cat: "Mates Clásicos", img: "camionero clasico.JPG", name: "Mate Camionero Clásico", price: null, stock: "out", specs: "Calabaza · Virola de alpaca · Base de cuero · Negro" },
+  // RANCHEROS
+  { cat: "Rancheros", img: "Sasha standar.JPG", name: "Ranchero Sasha Standar", price: 94000, specs: "Algarrobo Seleccionado · Color Natural · Clavos incrustados a mano" },
+  { cat: "Rancheros", img: "sasha un color.JPG", name: "Ranchero Sasha Cervantes · 1 Color", price: 94000, specs: "Algarrobo Seleccionado · Detalles premium" },
+  { cat: "Rancheros", img: "sasha 2 colores.JPG", name: "Ranchero Sasha Cervantes · 2 Colores", price: 94000, specs: "Algarrobo Seleccionado · Bicolor" },
+  { cat: "Rancheros", img: "sasah ranchero 2 colores.JPG", name: "Ranchero Sasha Cervantes · Celeste", price: 94000, specs: "Algarrobo Seleccionado · Tonos tierra y celeste" },
+  { cat: "Rancheros", img: "ranchero sasha.JPG", name: "Clásico Ranchero Sasha", price: null, stock: "out", specs: "Algarrobo Seleccionado · Multicolor · Detalles Premium" },
+  // BOMBILLAS (sin foto)
+  { cat: "Bombillas", name: "Chata Acero", price: 3900, specs: "Acero inoxidable" },
+  { cat: "Bombillas", name: "Pico de Loro Acero", price: 5500, specs: "Acero · filtro fino" },
+  { cat: "Bombillas", name: "Pico de Loro Pico Dorado", price: 6120, specs: "Acero · detalle dorado · 16/19cm" },
+  { cat: "Bombillas", name: "Pico de Loro Tirabuzón", price: 6620, specs: "Acero · 19cm" },
+  { cat: "Bombillas", name: "Pico de Loro Alpaca Standar", price: 25160, specs: "Alpaca · 19cm" },
+  { cat: "Bombillas", name: "Pico de Loro Premium", price: 46900, specs: "100% Alpaca · 19cm" },
+  // YERBA
+  { cat: "Yerba", img: "yerba sol y lluvia.JPG", name: "Yerba Sol y Lluvia", specs: "Yerba argentina · molienda equilibrada · perfil natural y rendidor", yerba: true,
+    sizes: [{ label: "500gr", price: 5000 }, { label: "1kg", price: 7500 }, { label: "2kg", price: 13000 }] },
+  // SETS
+  { cat: "Sets & Accesorios", img: "set matera.JPG", name: "Set Matera + Yerbero Edición Argentina", price: 68000, specs: "Bolso matero + yerbero bordados con sol argentino", set: true,
+    colors: ["Crudo", "Negro", "Albiceleste"] }
+];
+
+var CATS = ["Mates Clásicos", "Rancheros", "Bombillas", "Yerba", "Sets & Accesorios"];
+var state = { category: "Mates Clásicos", yerbaSize: 0, setColor: 0 };
+
+function renderTabs() {
+  var wrap = document.getElementById("tabs");
+  wrap.innerHTML = "";
+  CATS.forEach(function (c) {
+    var active = c === state.category;
+    var b = el("button", {
+      style: "border-radius: 9999px; padding: 10px 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.25s ease, color 0.25s ease;" +
+        "background: " + (active ? "#8A5A34" : "transparent") + "; color: " + (active ? "#EDE4D6" : "#241610") + "; border: 1px solid " + (active ? "#8A5A34" : "rgba(36,22,16,0.2)") + ";"
+    }, c);
+    b.onclick = function () { state.category = c; state.yerbaSize = 0; state.setColor = 0; renderTabs(); renderProducts(); };
+    wrap.appendChild(b);
+  });
+}
+
+function renderProducts() {
+  var wrap = document.getElementById("products");
+  wrap.innerHTML = "";
+  PRODUCTS.filter(function (p) { return p.cat === state.category; }).forEach(function (p) {
+    var hasImage = !!p.img;
+    var card = el("div", { style: "background: #EDE4D6; border: 1px solid rgba(36,22,16,0.1); border-radius: 18px; overflow: hidden; transition: transform 0.35s ease, box-shadow 0.35s ease; display: flex; flex-direction: column;" });
+    card.onmouseenter = function () { card.style.transform = "translateY(-6px)"; card.style.boxShadow = "0 24px 46px rgba(36,22,16,0.28)"; };
+    card.onmouseleave = function () { card.style.transform = "translateY(0)"; card.style.boxShadow = "none"; };
+
+    var media = '<div style="aspect-ratio: 3/4; background: #C2B4A0; position: relative;">' +
+      slotHtml(p.img, hasImage ? "contain" : "cover", p.name) + '</div>';
+
+    var body = '<div style="padding: 16px; display: flex; flex-direction: column; flex: 1; gap: 12px;">';
+    body += '<div><h3 style="font-family: \'Fraunces\', serif; font-style: italic; font-weight: 400; font-size: 19px; color: #241610; margin: 0 0 6px;">' + p.name + '</h3>' +
+      '<div style="font-size: 12px; line-height: 1.5; color: rgba(36,22,16,0.6);">' + (p.specs || "") + '</div></div>';
+
+    // options (yerba sizes / set colors)
+    var priceLabel, waHref, options = null, selIdx = 0;
+    if (p.yerba) {
+      selIdx = state.yerbaSize; var sel = p.sizes[selIdx];
+      options = p.sizes.map(function (s, i) { return { label: s.label, i: i }; });
+      priceLabel = fmt(sel.price);
+      waHref = wa("Hola Raiza! Me interesa la " + p.name + " " + sel.label + " (" + fmt(sel.price) + ")");
+    } else if (p.set) {
+      selIdx = state.setColor; var color = p.colors[selIdx];
+      options = p.colors.map(function (c, i) { return { label: c, i: i }; });
+      priceLabel = fmt(p.price);
+      waHref = wa("Hola Raiza! Me interesa el " + p.name + " — color " + color + " (" + fmt(p.price) + ")");
+    } else if (p.stock === "out") {
+      priceLabel = "Sin stock";
+    } else {
+      priceLabel = fmt(p.price);
+      waHref = wa("Hola Raiza! Me interesa el " + p.name + " (" + fmt(p.price) + ")");
+    }
+
+    if (options) {
+      body += '<div data-options style="display: flex; flex-wrap: wrap; gap: 6px;"></div>';
+    }
+
+    body += '<div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px;">';
+    body += '<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">' +
+      '<span style="font-size: 21px; font-weight: 600; color: #241610;">' + priceLabel + '</span>' +
+      (p.stock === "out" ? '<span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(36,22,16,0.5); border: 1px solid rgba(36,22,16,0.2); border-radius: 9999px; padding: 4px 10px;">Agotado</span>' : '') +
+      '</div>';
+    if (p.stock === "out") {
+      body += '<div style="display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(36,22,16,0.08); color: rgba(36,22,16,0.45); border-radius: 9999px; padding: 11px; font-size: 13px; font-weight: 500; cursor: not-allowed;">Sin stock</div>';
+    } else {
+      body += '<a data-wa href="' + waHref + '" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: #8A5A34; color: #EDE4D6; border-radius: 9999px; padding: 11px; font-size: 13px; font-weight: 500; transition: background 0.3s ease, transform 0.2s ease;" onmouseenter="waHover(this,1)" onmouseleave="waHover(this,0)">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>Comprar por WhatsApp</a>';
+    }
+    body += '</div></div>';
+
+    card.innerHTML = media + body;
+
+    // wire option buttons
+    if (options) {
+      var optWrap = card.querySelector("[data-options]");
+      options.forEach(function (o) {
+        var active = o.i === selIdx;
+        var b = el("button", {
+          style: "font-size: 12px; padding: 6px 12px; border-radius: 9999px; cursor: pointer; transition: all 0.2s ease;" +
+            "background: " + (active ? "#8A5A34" : "transparent") + "; color: " + (active ? "#EDE4D6" : "#241610") + "; border: 1px solid " + (active ? "#8A5A34" : "rgba(36,22,16,0.25)") + ";"
+        }, o.label);
+        b.onclick = function () { if (p.yerba) state.yerbaSize = o.i; else state.setColor = o.i; renderProducts(); };
+        optWrap.appendChild(b);
+      });
+    }
+    wrap.appendChild(card);
+  });
+  setupReveals(prefersReduced());
+}
+
+renderTabs();
+renderProducts();
+
+// ============================================================================
+// SCROLL / MOTION
+// ============================================================================
+function prefersReduced() { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+var reduce = prefersReduced();
+var root = document.getElementById("app");
+var navEl = document.getElementById("nav");
+var heroEl = document.getElementById("top");
+var bgEl = document.getElementById("bg");
+
+// hero staggered entrance
+Array.prototype.forEach.call(root.querySelectorAll("[data-anim]"), function (e) {
+  var i = parseInt(e.getAttribute("data-anim"), 10);
+  e.style.opacity = "0"; e.style.transform = "translateY(24px)"; e.style.filter = "blur(4px)";
+  e.style.transition = "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.7s cubic-bezier(0.16,1,0.3,1)";
+  setTimeout(function () { e.style.opacity = "1"; e.style.transform = "translateY(0)"; e.style.filter = "blur(0)"; }, 200 + i * 150);
+});
+
+// responsive nav links
+function applyNav() { navWrap.style.display = window.innerWidth >= 880 ? "flex" : "none"; }
+applyNav();
+window.addEventListener("resize", applyNav);
+
+// reveal-on-scroll
+var io;
+function setupReveals(reduced) {
+  if (io) io.disconnect();
+  var reveals = Array.prototype.slice.call(root.querySelectorAll("[data-reveal]"));
+  reveals.forEach(function (e) {
+    if (e._revealed) return;
+    if (reduced) { e._revealed = true; return; }
+    e.style.opacity = "0"; e.style.transform = "translateY(24px)"; e.style.filter = "blur(4px)";
+    e.style.transition = "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.7s cubic-bezier(0.16,1,0.3,1)";
+  });
+  if (reduced) return;
+  io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) {
+        en.target.style.opacity = "1";
+        en.target.style.transform = "translateY(var(--drift, 0px))";
+        en.target.style.transition = "opacity 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.7s cubic-bezier(0.16,1,0.3,1)";
+        en.target.style.filter = "blur(0)";
+        en.target._revealed = true;
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -100px 0px" });
+  reveals.forEach(function (e) { if (!e._revealed) io.observe(e); });
+}
+setupReveals(reduce);
+
+// scroll effects
+var parallax = Array.prototype.slice.call(root.querySelectorAll("[data-parallax]"));
+var drift = Array.prototype.slice.call(root.querySelectorAll("[data-reveal]"));
+function onScroll() {
+  var y = window.scrollY, vh = window.innerHeight;
+  var on = y > vh * 0.7;
+  navEl.style.background = on ? "rgba(36,22,16,0.85)" : "rgba(36,22,16,0)";
+  navEl.style.backdropFilter = on ? "blur(12px)" : "none";
+  navEl.style.webkitBackdropFilter = on ? "blur(12px)" : "none";
+  navEl.style.borderBottomColor = on ? "rgba(237,228,214,0.1)" : "rgba(237,228,214,0)";
+  if (reduce) return;
+  var prog = Math.min(y / (document.documentElement.scrollHeight - vh || 1), 1);
+  if (bgEl) bgEl.style.transform = "translateY(" + (-y * 0.06).toFixed(1) + "px) scale(" + (1 + prog * 0.1).toFixed(3) + ")";
+  if (heroEl && y < vh) {
+    var p = y / vh;
+    heroEl.style.opacity = String(1 - p * 0.8);
+    heroEl.style.transform = "scale(" + (1 - p * 0.05).toFixed(3) + ")";
+  }
+  parallax.forEach(function (e) {
+    var r = e.getBoundingClientRect();
+    var pr = (vh - r.top) / (vh + r.height);
+    e.style.transform = "translateY(" + ((pr - 0.5) * 40).toFixed(1) + "px)";
+  });
+  drift.forEach(function (e, i) {
+    if (!e._revealed) return;
+    var r = e.getBoundingClientRect();
+    var pr = (vh - r.top) / (vh + r.height);
+    var dir = i % 2 === 0 ? 1 : -1;
+    e.style.setProperty("--drift", ((0.5 - pr) * 26 * dir).toFixed(1) + "px");
+  });
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+</script>
+</body>
+</html>
