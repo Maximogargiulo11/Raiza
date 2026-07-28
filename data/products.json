@@ -1,28 +1,211 @@
 {
-  "categories": ["Mates Clásicos", "Rancheros", "Bombillas", "Yerba", "Sets & Accesorios"],
+  "categories": [
+    "Mates Clásicos",
+    "Rancheros",
+    "Bombillas",
+    "Yerba",
+    "Sets & Accesorios"
+  ],
   "products": [
-    { "id": "p1", "cat": "Mates Clásicos", "img": "torpedo clasico.JPG", "name": "Mate Torpedo Clásico", "price": 42000, "specs": "100% Calabaza · Virola de Alpaca Cincelada · Cuero Liso · Negro" },
-    { "id": "p2", "cat": "Mates Clásicos", "img": "imperial clasico.JPG", "name": "Mate Imperial Clásico", "price": 39800, "specs": "100% Calabaza · Fleje de acero · Virola de Alpaca · Cuero Liso · Negro" },
-    { "id": "p3", "cat": "Mates Clásicos", "img": "imperial crudo.JPG", "name": "Mate Imperial Crudo", "price": 59800, "specs": "100% Calabaza · Virola de Alpaca · Cuero Liso · Crudo" },
-    { "id": "p4", "cat": "Mates Clásicos", "img": "torpedo base bolita.JPG", "name": "Torpedo con Base de Bolita", "price": 72100, "specs": "100% Calabaza · Virola de Alpaca Cincelada · Base de Alpaca · Cuero Liso · Negro" },
-    { "id": "p5", "cat": "Mates Clásicos", "img": "mate criollo.JPG", "name": "Mate Criollo", "price": 20100, "specs": "Calabaza · Base de cuero cosida a mano" },
-    { "id": "p6", "cat": "Mates Clásicos", "img": "porito con base de cuero.JPG", "name": "Torpedo Porito con Base de Cuero", "price": 20100, "specs": "Calabaza porito · Base de cuero" },
-    { "id": "p7", "cat": "Mates Clásicos", "img": "galleta.JPG", "name": "Mate Galleta", "price": 35000, "specs": "Calabaza galleta · Base de cuero con broches" },
-    { "id": "p8", "cat": "Mates Clásicos", "img": "camionero mundial.JPG", "name": "Camionero Edición Copa Mundial '26", "price": 50000, "specs": "Edición Argentina · Celeste y blanco con sol" },
-    { "id": "p9", "cat": "Mates Clásicos", "img": "criollo diselo de autor.JPG", "name": "Criollo Diseño de Autor", "price": 45100, "specs": "Calabaza · Base de cuero pintada a mano" },
-    { "id": "p10", "cat": "Mates Clásicos", "img": "camionero clasico.JPG", "name": "Mate Camionero Clásico", "price": null, "stock": "out", "specs": "Calabaza · Virola de alpaca · Base de cuero · Negro" },
-    { "id": "p11", "cat": "Rancheros", "img": "Sasha standar.JPG", "name": "Ranchero Sasha Standar", "price": 94000, "specs": "Algarrobo Seleccionado · Color Natural · Clavos incrustados a mano" },
-    { "id": "p12", "cat": "Rancheros", "img": "sasha un color.JPG", "name": "Ranchero Sasha Cervantes · 1 Color", "price": 94000, "specs": "Algarrobo Seleccionado · Detalles premium" },
-    { "id": "p13", "cat": "Rancheros", "img": "sasha 2 colores.JPG", "name": "Ranchero Sasha Cervantes · 2 Colores", "price": 94000, "specs": "Algarrobo Seleccionado · Bicolor" },
-    { "id": "p14", "cat": "Rancheros", "img": "sasah ranchero 2 colores.JPG", "name": "Ranchero Sasha Cervantes · Celeste", "price": 94000, "specs": "Algarrobo Seleccionado · Tonos tierra y celeste" },
-    { "id": "p15", "cat": "Rancheros", "img": "ranchero sasha.JPG", "name": "Clásico Ranchero Sasha", "price": null, "stock": "out", "specs": "Algarrobo Seleccionado · Multicolor · Detalles Premium" },
-    { "id": "p16", "cat": "Bombillas", "name": "Chata Acero", "price": 3900, "specs": "Acero inoxidable" },
-    { "id": "p17", "cat": "Bombillas", "name": "Pico de Loro Acero", "price": 5500, "specs": "Acero · filtro fino" },
-    { "id": "p18", "cat": "Bombillas", "name": "Pico de Loro Pico Dorado", "price": 6120, "specs": "Acero · detalle dorado · 16/19cm" },
-    { "id": "p19", "cat": "Bombillas", "name": "Pico de Loro Tirabuzón", "price": 6620, "specs": "Acero · 19cm" },
-    { "id": "p20", "cat": "Bombillas", "name": "Pico de Loro Alpaca Standar", "price": 25160, "specs": "Alpaca · 19cm" },
-    { "id": "p21", "cat": "Bombillas", "name": "Pico de Loro Premium", "price": 46900, "specs": "100% Alpaca · 19cm" },
-    { "id": "p22", "cat": "Yerba", "img": "yerba sol y lluvia.JPG", "name": "Yerba Sol y Lluvia", "specs": "Yerba argentina · molienda equilibrada · perfil natural y rendidor", "yerba": true, "sizes": [{ "label": "500gr", "price": 5000 }, { "label": "1kg", "price": 7500 }, { "label": "2kg", "price": 13000 }] },
-    { "id": "p23", "cat": "Sets & Accesorios", "img": "set matera.JPG", "name": "Set Matera + Yerbero Edición Argentina", "price": 68000, "specs": "Bolso matero + yerbero bordados con sol argentino", "set": true, "colors": ["Crudo", "Negro", "Albiceleste"] }
+    {
+      "id": "p1",
+      "cat": "Mates Clásicos",
+      "img": "torpedo clasico.JPG",
+      "name": "Mate Torpedo Clásico",
+      "price": 42000,
+      "specs": "100% Calabaza · Virola de Alpaca Cincelada · Cuero Liso · Negro"
+    },
+    {
+      "id": "p2",
+      "cat": "Mates Clásicos",
+      "img": "imperial clasico.JPG",
+      "name": "Mate Imperial Clásico",
+      "price": 39800,
+      "specs": "100% Calabaza · Fleje de acero · Virola de Alpaca · Cuero Liso · Negro"
+    },
+    {
+      "id": "p3",
+      "cat": "Mates Clásicos",
+      "img": "imperial crudo.JPG",
+      "name": "Mate Imperial Crudo",
+      "price": 59800,
+      "specs": "100% Calabaza · Virola de Alpaca · Cuero Liso · Crudo"
+    },
+    {
+      "id": "p4",
+      "cat": "Mates Clásicos",
+      "img": "torpedo base bolita.JPG",
+      "name": "Torpedo con Base de Bolita",
+      "price": 72100,
+      "specs": "100% Calabaza · Virola de Alpaca Cincelada · Base de Alpaca · Cuero Liso · Negro"
+    },
+    {
+      "id": "p5",
+      "cat": "Mates Clásicos",
+      "img": "mate criollo.JPG",
+      "name": "Mate Criollo",
+      "price": 20100,
+      "specs": "Calabaza · Base de cuero cosida a mano"
+    },
+    {
+      "id": "p6",
+      "cat": "Mates Clásicos",
+      "img": "porito con base de cuero.JPG",
+      "name": "Torpedo Porito con Base de Cuero",
+      "price": 20100,
+      "specs": "Calabaza porito · Base de cuero"
+    },
+    {
+      "id": "p7",
+      "cat": "Mates Clásicos",
+      "img": "galleta.JPG",
+      "name": "Mate Galleta",
+      "price": 35000,
+      "specs": "Calabaza galleta · Base de cuero con broches"
+    },
+    {
+      "id": "p8",
+      "cat": "Mates Clásicos",
+      "img": "camionero mundial.JPG",
+      "name": "Camionero Edición Copa Mundial '26",
+      "price": 50000,
+      "specs": "Edición Argentina · Celeste y blanco con sol"
+    },
+    {
+      "id": "p9",
+      "cat": "Mates Clásicos",
+      "img": "criollo diselo de autor.JPG",
+      "name": "Criollo Diseño de Autor",
+      "price": 45100,
+      "specs": "Calabaza · Base de cuero pintada a mano"
+    },
+    {
+      "id": "p10",
+      "cat": "Mates Clásicos",
+      "img": "camionero clasico.JPG",
+      "name": "Mate Camionero Clásico",
+      "price": null,
+      "stock": "out",
+      "specs": "Calabaza · Virola de alpaca · Base de cuero · Negro"
+    },
+    {
+      "id": "p11",
+      "cat": "Rancheros",
+      "img": "Sasha standar.JPG",
+      "name": "Ranchero Sasha Standar",
+      "price": 94000,
+      "specs": "Algarrobo Seleccionado · Color Natural · Clavos incrustados a mano"
+    },
+    {
+      "id": "p12",
+      "cat": "Rancheros",
+      "img": "sasha un color.JPG",
+      "name": "Ranchero Sasha Cervantes · 1 Color",
+      "price": 94000,
+      "specs": "Algarrobo Seleccionado · Detalles premium"
+    },
+    {
+      "id": "p13",
+      "cat": "Rancheros",
+      "img": "sasha 2 colores.JPG",
+      "name": "Ranchero Sasha Cervantes · 2 Colores",
+      "price": 94000,
+      "specs": "Algarrobo Seleccionado · Bicolor"
+    },
+    {
+      "id": "p14",
+      "cat": "Rancheros",
+      "img": "sasah ranchero 2 colores.JPG",
+      "name": "Ranchero Sasha Cervantes · Celeste",
+      "price": 94000,
+      "specs": "Algarrobo Seleccionado · Tonos tierra y celeste"
+    },
+    {
+      "id": "p15",
+      "cat": "Rancheros",
+      "img": "ranchero sasha.JPG",
+      "name": "Clásico Ranchero Sasha",
+      "price": null,
+      "stock": "out",
+      "specs": "Algarrobo Seleccionado · Multicolor · Detalles Premium"
+    },
+    {
+      "id": "p16",
+      "cat": "Bombillas",
+      "name": "Chata Acero",
+      "price": 3900,
+      "specs": "Acero inoxidable"
+    },
+    {
+      "id": "p17",
+      "cat": "Bombillas",
+      "name": "Pico de Loro Acero",
+      "price": 5500,
+      "specs": "Acero · filtro fino"
+    },
+    {
+      "id": "p18",
+      "cat": "Bombillas",
+      "name": "Pico de Loro Pico Dorado",
+      "price": 6120,
+      "specs": "Acero · detalle dorado · 16/19cm"
+    },
+    {
+      "id": "p19",
+      "cat": "Bombillas",
+      "name": "Pico de Loro Tirabuzón",
+      "price": 6620,
+      "specs": "Acero · 19cm"
+    },
+    {
+      "id": "p20",
+      "cat": "Bombillas",
+      "name": "Pico de Loro Alpaca Standar",
+      "price": 25160,
+      "specs": "Alpaca · 19cm"
+    },
+    {
+      "id": "p21",
+      "cat": "Bombillas",
+      "name": "Pico de Loro Premium",
+      "price": 46900,
+      "specs": "100% Alpaca · 19cm"
+    },
+    {
+      "id": "p22",
+      "cat": "Yerba",
+      "img": "yerba sol y lluvia.JPG",
+      "name": "Yerba Sol y Lluvia",
+      "specs": "Yerba argentina · molienda equilibrada · perfil natural y rendidor",
+      "yerba": true,
+      "sizes": [
+        {
+          "label": "500gr",
+          "price": 5000
+        },
+        {
+          "label": "1kg",
+          "price": 7500
+        },
+        {
+          "label": "2kg",
+          "price": 13000
+        }
+      ]
+    },
+    {
+      "id": "p23",
+      "cat": "Sets & Accesorios",
+      "img": "set matera.JPG",
+      "name": "Set Matera + Yerbero Edición Argentina",
+      "price": 68000,
+      "specs": "Bolso matero + yerbero bordados con sol argentino",
+      "set": true,
+      "colors": [
+        "Crudo",
+        "Negro",
+        "Albiceleste"
+      ]
+    }
   ]
 }
