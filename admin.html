@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Raiza · Panel de administración</title>
+<style>
+  :root { --bg:#241610; --panel:#2E1D12; --card:#3a2618; --line:rgba(237,228,214,0.14); --tan:#B9A78E; --brown:#8A5A34; --brown-d:#6E4526; --cream:#EDE4D6; --muted:rgba(237,228,214,0.6); }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--cream); font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size:15px; line-height:1.5; }
+  a { color:var(--tan); }
+  h1,h2,h3 { font-weight:600; }
+  .wrap { max-width: 1000px; margin:0 auto; padding: 24px 20px 120px; }
+  header.top { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 20px; border-bottom:1px solid var(--line); position:sticky; top:0; background:rgba(36,22,16,0.9); backdrop-filter:blur(8px); z-index:20; }
+  header.top .brand { display:flex; align-items:center; gap:10px; font-weight:600; letter-spacing:.02em; }
+  .btn { display:inline-flex; align-items:center; gap:8px; border:0; border-radius:9999px; padding:10px 18px; font-size:14px; font-weight:600; cursor:pointer; transition: background .2s, opacity .2s; text-decoration:none; }
+  .btn.primary { background:var(--brown); color:var(--cream); } .btn.primary:hover { background:var(--brown-d); }
+  .btn.ghost { background:transparent; color:var(--cream); border:1px solid var(--line); }
+  .btn.ghost:hover { background:rgba(237,228,214,0.06); }
+  .btn.danger { background:transparent; color:#e79a8a; border:1px solid rgba(231,154,138,0.4); }
+  .btn.sm { padding:6px 12px; font-size:13px; }
+  .btn:disabled { opacity:.5; cursor:not-allowed; }
+  input, select, textarea { width:100%; background:#1b0f0a; color:var(--cream); border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-size:14px; font-family:inherit; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:var(--brown); }
+  label { display:block; font-size:12px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin:0 0 6px; }
+  .field { margin-bottom:14px; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .section { margin-top:28px; }
+  .section > h2 { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 14px; font-size:20px; }
+  .plist { display:flex; flex-direction:column; gap:10px; }
+  .prow { display:flex; align-items:center; gap:12px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 12px; }
+  .prow img, .prow .noimg { width:52px; height:52px; border-radius:8px; object-fit:cover; background:#1b0f0a; flex:none; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px; text-align:center; }
+  .prow .meta { flex:1; min-width:0; }
+  .prow .meta .n { font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .prow .meta .s { font-size:12px; color:var(--muted); }
+  .tag { font-size:11px; text-transform:uppercase; letter-spacing:.08em; border:1px solid var(--line); border-radius:9999px; padding:2px 8px; color:var(--muted); }
+  .tag.out { color:#e79a8a; border-color:rgba(231,154,138,0.4); }
+  .savebar { position:fixed; left:0; right:0; bottom:0; background:rgba(27,15,10,0.96); border-top:1px solid var(--line); padding:14px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px; z-index:30; backdrop-filter:blur(8px); }
+  .savebar .status { font-size:13px; color:var(--muted); }
+  .status.ok { color:#8fce9b; } .status.err { color:#e79a8a; }
+  .modal { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:flex-start; justify-content:center; padding:30px 16px; z-index:40; overflow:auto; }
+  .modal.open { display:flex; }
+  .modal .box { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px; width:100%; max-width:520px; }
+  .thumb-prev { width:100%; aspect-ratio:3/4; max-height:220px; object-fit:contain; background:#1b0f0a; border:1px solid var(--line); border-radius:10px; margin-top:8px; }
+  .muted { color:var(--muted); }
+  .hint { font-size:12px; color:var(--muted); margin-top:6px; }
+  .center { min-height:70vh; display:flex; align-items:center; justify-content:center; }
+  .login { max-width:440px; width:100%; }
+  .iglist { display:flex; flex-direction:column; gap:8px; }
+  .igrow { display:flex; align-items:center; gap:8px; }
+  .igrow input { flex:1; }
+  code { background:#1b0f0a; padding:1px 6px; border-radius:5px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="center" style="display:none;">
+  <div class="card login">
+    <h1 style="margin:0 0 6px;">Raiza · Admin</h1>
+    <p class="muted" style="margin:0 0 18px;">Ingresá tu <b>token de GitHub</b> (fine-grained, con permiso Contents: Read & write sobre el repo Raiza). Se guarda solo en este navegador.</p>
+    <div class="field">
+      <label>GitHub token</label>
+      <input id="token-input" type="password" placeholder="github_pat_..." autocomplete="off">
+    </div>
+    <button id="login-btn" class="btn primary" style="width:100%; justify-content:center;">Entrar</button>
+    <p id="login-msg" class="hint" style="min-height:16px;"></p>
+    <p class="hint">¿Cómo crear el token? En GitHub: Settings → Developer settings → Fine-grained tokens → repositorio <code>Maximogargiulo11/Raiza</code> → permiso <b>Contents: Read and write</b>.</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;">
+  <header class="top">
+    <div class="brand">🧉 Raiza · Panel</div>
+    <div style="display:flex; gap:10px;">
+      <a class="btn ghost sm" href="/" target="_blank" rel="noopener">Ver web</a>
+      <button id="logout-btn" class="btn ghost sm">Salir</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <!-- PRODUCTOS -->
+    <div class="section">
+      <h2>Productos <button id="add-product" class="btn primary sm">+ Agregar producto</button></h2>
+      <div id="product-list" class="plist"></div>
+    </div>
+
+    <!-- INSTAGRAM -->
+    <div class="section">
+      <h2>Instagram <button id="add-ig" class="btn primary sm">+ Agregar post</button></h2>
+      <p class="hint" style="margin-top:-6px;">Pegá la URL de cada publicación (ej: <code>https://www.instagram.com/p/XXXXXXXXXXX/</code>). Se muestran como embeds reales en la sección "Comunidad".</p>
+      <div id="ig-list" class="iglist"></div>
+    </div>
+  </div>
+
+  <div class="savebar">
+    <span id="status" class="status">Sin cambios sin guardar.</span>
+    <div style="display:flex; gap:10px;">
+      <button id="discard-btn" class="btn ghost sm">Descartar</button>
+      <button id="save-btn" class="btn primary">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div id="modal" class="modal">
+  <div class="box">
+    <h2 id="modal-title" style="margin:0 0 16px;">Producto</h2>
+    <div class="field">
+      <label>Nombre</label>
+      <input id="f-name" type="text" placeholder="Mate Torpedo Clásico">
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>Categoría</label>
+        <select id="f-cat"></select>
+      </div>
+      <div class="field" id="f-newcat-wrap" style="display:none;">
+        <label>Nueva categoría</label>
+        <input id="f-newcat" type="text" placeholder="Nombre de la categoría">
+      </div>
+    </div>
+    <div id="variant-note" class="card" style="display:none; margin-bottom:14px; font-size:13px;"></div>
+    <div class="row" id="price-stock-row">
+      <div class="field">
+        <label>Precio (ARS)</label>
+        <input id="f-price" type="number" min="0" step="100" placeholder="42000">
+      </div>
+      <div class="field">
+        <label>Stock</label>
+        <select id="f-stock">
+          <option value="in">En stock</option>
+          <option value="out">Sin stock</option>
+          <option value="consultar">A consultar</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Descripción / specs</label>
+      <textarea id="f-specs" rows="2" placeholder="100% Calabaza · Virola de Alpaca · ..."></textarea>
+    </div>
+    <div class="field">
+      <label>Foto</label>
+      <input id="f-photo" type="file" accept="image/*">
+      <img id="f-preview" class="thumb-prev" alt="" style="display:none;">
+      <p class="hint">Dejá vacío para conservar la foto actual (si edita) o sin foto.</p>
+    </div>
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:8px;">
+      <button id="modal-cancel" class="btn ghost">Cancelar</button>
+      <button id="modal-save" class="btn primary">Guardar producto</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================================
+// Config del repo
+// ============================================================================
+var OWNER = "Maximogargiulo11", REPO = "Raiza", BRANCH = "main";
+var API = "https://api.github.com/repos/" + OWNER + "/" + REPO;
+var TOKEN_KEY = "raiza_gh_token";
+
+var token = localStorage.getItem(TOKEN_KEY) || "";
+var data = { categories: [], products: [] };   // products.json en memoria
+var ig = { profile: "https://instagram.com/raizaclubdemate", posts: [] };
+var pendingImages = {};   // { "uploads/archivo.jpg": "<base64 sin prefijo>" }
+var dirty = false;
+var editingId = null;
+
+// ---- helpers DOM ----
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
+function fmt(n) { return n == null ? "" : "$" + Number(n).toLocaleString("es-AR"); }
+function slug(s) { return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "producto"; }
+function setDirty(v) { dirty = v; $("status").textContent = v ? "Tenés cambios sin guardar." : "Todo guardado."; $("status").className = "status" + (v ? "" : " ok"); }
+function setStatus(msg, kind) { $("status").textContent = msg; $("status").className = "status" + (kind ? " " + kind : ""); }
+
+// ---- GitHub API ----
+function gh(method, path, body) {
+  return fetch(API + path, {
+    method: method,
+    headers: { "Authorization": "Bearer " + token, "Accept": "application/vnd.github+json", "Content-Type": "application/json" },
+    body: body ? JSON.stringify(body) : undefined
+  }).then(function (r) {
+    if (!r.ok) return r.text().then(function (t) { throw new Error(r.status + " " + t); });
+    return r.status === 204 ? {} : r.json();
+  });
+}
+function ghGetFile(path) {
+  // devuelve {json, sha} o null si no existe
+  return gh("GET", "/contents/" + path + "?ref=" + BRANCH + "&t=" + Date.now()).then(function (res) {
+    var content = decodeURIComponent(escape(atob(res.content.replace(/\n/g, ""))));
+    return { json: JSON.parse(content), sha: res.sha };
+  }).catch(function (e) {
+    if (String(e.message).indexOf("404") === 0) return null;
+    throw e;
+  });
+}
+
+// ============================================================================
+// Carga inicial
+// ============================================================================
+function boot() {
+  if (!token) { $("login").style.display = "flex"; return; }
+  $("login").style.display = "none";
+  $("app").style.display = "block";
+  setStatus("Cargando datos…");
+  Promise.all([ghGetFile("data/products.json"), ghGetFile("data/instagram.json")]).then(function (res) {
+    if (res[0] && res[0].json) { data = res[0].json; data.categories = data.categories || []; data.products = data.products || []; }
+    if (res[1] && res[1].json) { ig = res[1].json; ig.posts = ig.posts || []; }
+    renderProducts();
+    renderIg();
+    setDirty(false);
+  }).catch(function (e) {
+    setStatus("Error al cargar: " + e.message, "err");
+    if (String(e.message).indexOf("401") === 0) { logout(); $("login-msg").textContent = "Token inválido."; $("login-msg").className = "hint status err"; }
+  });
+}
+
+// ============================================================================
+// Render de productos
+// ============================================================================
+function renderProducts() {
+  var list = $("product-list");
+  list.innerHTML = "";
+  if (!data.products.length) { list.innerHTML = '<p class="muted">No hay productos todavía.</p>'; return; }
+  data.products.forEach(function (p) {
+    var row = document.createElement("div");
+    row.className = "prow";
+    var isNew = pendingImages["uploads/" + p.img];
+    var thumb = p.img
+      ? '<img src="' + (isNew ? isNew.url : "/uploads/" + encodeURIComponent(p.img)) + '" alt="">'
+      : '<div class="noimg">sin<br>foto</div>';
+    var variant = p.sizes ? " · variantes" : (p.colors ? " · colores" : "");
+    var priceTxt = p.sizes ? "desde " + fmt(p.sizes[0].price) : (p.stock === "out" ? "" : fmt(p.price));
+    var stockTag = p.stock === "out" ? '<span class="tag out">Sin stock</span>' : (p.stock === "consultar" ? '<span class="tag">A consultar</span>' : "");
+    row.innerHTML =
+      thumb +
+      '<div class="meta"><div class="n">' + esc(p.name) + '</div>' +
+      '<div class="s">' + esc(p.cat) + variant + (priceTxt ? " · " + priceTxt : "") + " " + stockTag + '</div></div>' +
+      '<button class="btn ghost sm" data-edit>Editar</button>' +
+      '<button class="btn danger sm" data-del>Borrar</button>';
+    var _im = row.querySelector("img");
+    if (_im) _im.onerror = function () { var d = document.createElement("div"); d.className = "noimg"; d.innerHTML = "sin<br>foto"; this.replaceWith(d); };
+    row.querySelector("[data-edit]").onclick = function () { openForm(p.id); };
+    row.querySelector("[data-del]").onclick = function () {
+      if (!confirm('¿Borrar "' + p.name + '"?')) return;
+      data.products = data.products.filter(function (x) { return x.id !== p.id; });
+      renderProducts(); setDirty(true);
+    };
+    list.appendChild(row);
+  });
+}
+
+// ============================================================================
+// Formulario de producto (modal)
+// ============================================================================
+function fillCategories(selected) {
+  var sel = $("f-cat");
+  sel.innerHTML = "";
+  data.categories.forEach(function (c) {
+    var o = document.createElement("option"); o.value = c; o.textContent = c; if (c === selected) o.selected = true; sel.appendChild(o);
+  });
+  var o2 = document.createElement("option"); o2.value = "__new__"; o2.textContent = "➕ Nueva categoría…"; sel.appendChild(o2);
+  toggleNewCat();
+}
+function toggleNewCat() { $("f-newcat-wrap").style.display = $("f-cat").value === "__new__" ? "block" : "none"; }
+
+function openForm(id) {
+  editingId = id || null;
+  var p = id ? data.products.filter(function (x) { return x.id === id; })[0] : null;
+  $("modal-title").textContent = p ? "Editar producto" : "Nuevo producto";
+  fillCategories(p ? p.cat : data.categories[0]);
+  $("f-name").value = p ? p.name : "";
+  $("f-specs").value = p ? (p.specs || "") : "";
+  $("f-price").value = p && p.price != null ? p.price : "";
+  $("f-stock").value = p && p.stock ? p.stock : "in";
+  $("f-photo").value = "";
+  var prev = $("f-preview");
+  if (p && p.img) { var pend = pendingImages["uploads/" + p.img]; prev.onerror = function () { this.style.display = "none"; }; prev.src = pend ? pend.url : "/uploads/" + encodeURIComponent(p.img); prev.style.display = "block"; }
+  else { prev.style.display = "none"; prev.src = ""; }
+  // productos con variantes: se preservan precio/variantes, sólo se editan nombre/desc/foto/categoría
+  var hasVariants = p && (p.sizes || p.colors || p.yerba || p.set);
+  $("variant-note").style.display = hasVariants ? "block" : "none";
+  $("price-stock-row").style.display = hasVariants ? "none" : "grid";
+  if (hasVariants) $("variant-note").innerHTML = "Este producto tiene <b>variantes</b> (tamaños o colores). Podés editar nombre, categoría, descripción y foto; el precio y las variantes se conservan tal cual.";
+  $("modal").classList.add("open");
+  $("f-name").focus();
+}
+function closeForm() { $("modal").classList.remove("open"); editingId = null; }
+
+$("f-cat").onchange = toggleNewCat;
+$("f-photo").onchange = function () {
+  var file = this.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function () { var prev = $("f-preview"); prev.src = reader.result; prev.style.display = "block"; };
+  reader.readAsDataURL(file);
+};
+
+$("modal-save").onclick = function () {
+  var name = $("f-name").value.trim();
+  if (!name) { alert("Poné un nombre."); return; }
+  var cat = $("f-cat").value;
+  if (cat === "__new__") { cat = $("f-newcat").value.trim(); if (!cat) { alert("Escribí la nueva categoría."); return; } if (data.categories.indexOf(cat) < 0) data.categories.push(cat); }
+  var p = editingId ? data.products.filter(function (x) { return x.id === editingId; })[0] : { id: "p" + Date.now() };
+  var hasVariants = p && (p.sizes || p.colors || p.yerba || p.set);
+  p.name = name;
+  p.cat = cat;
+  p.specs = $("f-specs").value.trim();
+  if (!hasVariants) {
+    p.stock = $("f-stock").value;
+    if (p.stock === "out") { p.price = null; }
+    else { var pr = parseInt($("f-price").value, 10); p.price = isNaN(pr) ? null : pr; }
+    if (p.stock === "in") delete p.stock;   // "in" es el default, no hace falta guardarlo
+  }
+  // foto nueva
+  var file = $("f-photo").files[0];
+  var finish = function () {
+    if (!editingId) data.products.push(p);
+    closeForm(); renderProducts(); setDirty(true);
+  };
+  if (file) {
+    var ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+    var fname = slug(name) + "-" + Date.now() + "." + ext;
+    var reader = new FileReader();
+    reader.onload = function () {
+      pendingImages["uploads/" + fname] = { b64: reader.result.split(",")[1], url: reader.result };
+      p.img = fname;
+      finish();
+    };
+    reader.readAsDataURL(file);
+  } else { finish(); }
+};
+
+// ============================================================================
+// Instagram
+// ============================================================================
+function renderIg() {
+  var list = $("ig-list");
+  list.innerHTML = "";
+  if (!ig.posts.length) { list.innerHTML = '<p class="muted">Sin posts. Agregá al menos uno para que se vea la grilla.</p>'; return; }
+  ig.posts.forEach(function (url, i) {
+    var row = document.createElement("div");
+    row.className = "igrow";
+    row.innerHTML =
+      '<input type="text" value="' + esc(url) + '" placeholder="https://www.instagram.com/p/...">' +
+      '<button class="btn ghost sm" data-up ' + (i === 0 ? "disabled" : "") + '>↑</button>' +
+      '<button class="btn ghost sm" data-down ' + (i === ig.posts.length - 1 ? "disabled" : "") + '>↓</button>' +
+      '<button class="btn danger sm" data-del>✕</button>';
+    row.querySelector("input").onchange = function () { ig.posts[i] = this.value.trim(); setDirty(true); };
+    row.querySelector("[data-up]").onclick = function () { var t = ig.posts[i]; ig.posts[i] = ig.posts[i - 1]; ig.posts[i - 1] = t; renderIg(); setDirty(true); };
+    row.querySelector("[data-down]").onclick = function () { var t = ig.posts[i]; ig.posts[i] = ig.posts[i + 1]; ig.posts[i + 1] = t; renderIg(); setDirty(true); };
+    row.querySelector("[data-del]").onclick = function () { ig.posts.splice(i, 1); renderIg(); setDirty(true); };
+    list.appendChild(row);
+  });
+}
+$("add-ig").onclick = function () { ig.posts.push(""); renderIg(); setDirty(true); document.querySelectorAll("#ig-list input"); };
+
+// ============================================================================
+// Guardar (commit atómico vía Git Data API)
+// ============================================================================
+function b64utf8(str) { return btoa(unescape(encodeURIComponent(str))); }
+
+$("save-btn").onclick = function () {
+  // limpiar posts vacíos
+  ig.posts = ig.posts.filter(function (u) { return u && u.trim(); });
+  var btn = $("save-btn"); btn.disabled = true;
+  setStatus("Guardando… no cierres la página.");
+  var files = [
+    { path: "data/products.json", content: JSON.stringify(data, null, 2) + "\n", encoding: "utf-8" },
+    { path: "data/instagram.json", content: JSON.stringify(ig, null, 2) + "\n", encoding: "utf-8" }
+  ];
+  Object.keys(pendingImages).forEach(function (path) { files.push({ path: path, content: pendingImages[path].b64, encoding: "base64" }); });
+
+  var baseCommitSha, baseTreeSha;
+  gh("GET", "/git/ref/heads/" + BRANCH)
+    .then(function (ref) { baseCommitSha = ref.object.sha; return gh("GET", "/git/commits/" + baseCommitSha); })
+    .then(function (commit) {
+      baseTreeSha = commit.tree.sha;
+      // crear un blob por archivo
+      return Promise.all(files.map(function (f) {
+        return gh("POST", "/git/blobs", { content: f.content, encoding: f.encoding })
+          .then(function (b) { return { path: f.path, mode: "100644", type: "blob", sha: b.sha }; });
+      }));
+    })
+    .then(function (tree) { return gh("POST", "/git/trees", { base_tree: baseTreeSha, tree: tree }); })
+    .then(function (newTree) { return gh("POST", "/git/commits", { message: "Admin: actualiza productos e Instagram", tree: newTree.sha, parents: [baseCommitSha] }); })
+    .then(function (commit) { return gh("PATCH", "/git/refs/heads/" + BRANCH, { sha: commit.sha }); })
+    .then(function () {
+      pendingImages = {};
+      btn.disabled = false;
+      setStatus("✓ Guardado. Vercel va a republicar en ~30s.", "ok");
+      dirty = false;
+    })
+    .catch(function (e) {
+      btn.disabled = false;
+      setStatus("Error al guardar: " + e.message, "err");
+    });
+};
+
+$("discard-btn").onclick = function () { if (dirty && !confirm("¿Descartar los cambios sin guardar?")) return; pendingImages = {}; boot(); };
+
+// ============================================================================
+// Login / logout
+// ============================================================================
+function logout() { localStorage.removeItem(TOKEN_KEY); token = ""; $("app").style.display = "none"; $("login").style.display = "flex"; }
+$("login-btn").onclick = function () {
+  var t = $("token-input").value.trim();
+  if (!t) { $("login-msg").textContent = "Pegá el token."; return; }
+  token = t; localStorage.setItem(TOKEN_KEY, t);
+  $("login-msg").textContent = "";
+  boot();
+};
+$("token-input").onkeydown = function (e) { if (e.key === "Enter") $("login-btn").click(); };
+$("logout-btn").onclick = function () { if (dirty && !confirm("Tenés cambios sin guardar. ¿Salir igual?")) return; logout(); };
+$("add-product").onclick = function () { openForm(null); };
+$("modal-cancel").onclick = closeForm;
+$("modal").onclick = function (e) { if (e.target === $("modal")) closeForm(); };
+window.addEventListener("beforeunload", function (e) { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+
+boot();
+</script>
+</body>
+</html>

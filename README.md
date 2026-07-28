@@ -21,11 +21,33 @@ Es un sitio estático en la raíz del repo, así que Vercel lo detecta solo:
 2. Framework Preset: **Other** (o *Static*). Root: `/`. Sin build command.
 3. Deploy. Listo.
 
+## Panel de administración (`/admin`)
+
+Los productos y los posts de Instagram se editan desde un panel web sin tocar código.
+Los datos viven en `data/products.json` y `data/instagram.json`; la landing los lee al cargar.
+
+**Cómo entrar:** andá a `tu-sitio.vercel.app/admin`. Te pide un **token de GitHub**
+(se guarda solo en tu navegador). Con el token, el panel guarda cada cambio haciendo
+un commit al repo y Vercel republica solo en ~30s.
+
+**Crear el token (una sola vez):**
+1. GitHub → **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**.
+2. **Resource owner:** tu usuario. **Repository access:** *Only select repositories* → `Maximogargiulo11/Raiza`.
+3. **Permissions → Repository permissions → Contents:** *Read and write*.
+4. Generá el token (`github_pat_...`), copialo y pegalo en el panel. Guardá una copia en un lugar seguro.
+
+**Qué podés hacer:**
+- **Productos:** agregar / editar / borrar, con foto (la subís desde tu compu), categoría, precio, stock.
+- **Instagram:** pegar las URLs de los posts que querés mostrar en la sección "Comunidad" (se ven como embeds reales).
+
+> Nota: los productos con variantes (Yerba por tamaño, Set por color) se conservan y podés
+> editarles nombre/foto/descripción; el editor de variantes queda para una etapa siguiente.
+
 ## Configuración
 
 - **WhatsApp:** el número está en `index.html` (variable `WA`, formato
   `54` + `9` + número, hoy `5493834021235`). Cambialo ahí si hace falta.
-- **Instagram:** los links apuntan a `instagram.com/raizaclubdemate`.
+- **Instagram:** el botón de perfil apunta a `instagram.com/raizaclubdemate` (en `index.html`).
 
 ## Fotos de productos
 
@@ -60,9 +82,17 @@ uploads/set matera.JPG
 En cuanto el archivo exista, la foto reemplaza al placeholder automáticamente
 (no hay que tocar código). Las bombillas no llevan foto por diseño.
 
+**Más fácil:** desde el panel `/admin` podés editar cada producto y subirle la foto
+directamente (sin nombres exactos ni commits manuales).
+
 ## Estructura
 
 ```
-index.html                 · la landing completa (markup + estilos + lógica)
-uploads/                   · imágenes (logo, fondo, nosotros, instagram, productos)
+index.html                 · la landing (lee los datos de data/*.json)
+admin.html                 · panel de administración (se abre en /admin)
+data/products.json         · catálogo (categorías + productos)
+data/instagram.json        · posts de Instagram a mostrar
+vercel.json                · cleanUrls (para que /admin funcione sin .html)
+uploads/                   · imágenes (logo, fondo, nosotros, fotos de producto)
+fonts/                     · tipografía Sanchez
 ```

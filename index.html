@@ -163,7 +163,7 @@
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: #6E4526; margin-bottom: 14px;">Comunidad</div>
       <h2 style="font-family: 'Sanchez', serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 5vw, 3.4rem); margin: 0 0 14px;">Sumate al club matero.</h2>
       <p style="font-size: 16px; color: rgba(36,22,16,0.7); margin: 0 auto 40px; max-width: 32rem;">Seguinos, compartí tu ronda y sé parte de Raiza.</p>
-      <div id="ig" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 40px;"></div>
+      <div id="ig" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; align-items: start; justify-items: center; margin-bottom: 40px;"></div>
       <a href="https://instagram.com/raizaclubdemate" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; background: #241610; color: #EDE4D6; border-radius: 9999px; padding: 15px 30px; font-size: 15px; font-weight: 500; transition: transform 0.2s ease, background 0.3s ease;" onmouseenter="this.style.transform='scale(1.03)';this.style.background='#000'" onmouseleave="this.style.transform='scale(1)';this.style.background='#241610'">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
         @raizaclubdemate
@@ -317,58 +317,52 @@ var icons = {
   ));
 });
 
-// ---- Instagram tiles ----
-var igFiles = ["ig_images-1785207047989.JPG", "", "", "", "", ""];
+// ---- Instagram: embeds reales desde data/instagram.json ----
 var igWrap = document.getElementById("ig");
-igFiles.forEach(function (file) {
-  var a = el("a", { href: "https://instagram.com/raizaclubdemate", target: "_blank", rel: "noopener", style: "position: relative; display: block; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; background: #C2B4A0;" },
-    slotHtml(file, "cover", "Instagram") +
-    '<span data-ig style="position: absolute; inset: 0; background: rgba(138,90,52,0); display: flex; align-items: center; justify-content: center; transition: background 0.3s ease;">' +
-      '<svg data-igicon width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#EDE4D6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0; transition: opacity 0.3s ease;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>' +
-    '</span>');
-  a.onmouseenter = function () { a.querySelector("[data-ig]").style.background = "rgba(138,90,52,0.55)"; a.querySelector("[data-igicon]").style.opacity = "1"; };
-  a.onmouseleave = function () { a.querySelector("[data-ig]").style.background = "rgba(138,90,52,0)"; a.querySelector("[data-igicon]").style.opacity = "0"; };
-  igWrap.appendChild(a);
-});
+function loadInstagram() {
+  fetch("data/instagram.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (data) {
+    var posts = (data && data.posts) || [];
+    if (!posts.length) { igWrap.style.display = "none"; return; }
+    igWrap.style.display = "grid";
+    igWrap.innerHTML = "";
+    posts.forEach(function (url) {
+      var bq = document.createElement("blockquote");
+      bq.className = "instagram-media";
+      bq.setAttribute("data-instgrm-permalink", url);
+      bq.setAttribute("data-instgrm-version", "14");
+      bq.style.cssText = "background:#fff; border:0; border-radius:12px; margin:0; width:100%; min-width:260px; max-width:400px; box-shadow:0 12px 30px rgba(36,22,16,0.18);";
+      igWrap.appendChild(bq);
+    });
+    // Procesa los embeds (carga el script de Instagram una sola vez)
+    if (window.instgrm && window.instgrm.Embeds) {
+      window.instgrm.Embeds.process();
+    } else if (!document.getElementById("ig-embed-js")) {
+      var s = document.createElement("script");
+      s.id = "ig-embed-js"; s.async = true; s.src = "https://www.instagram.com/embed.js";
+      document.body.appendChild(s);
+    }
+  }).catch(function () { igWrap.style.display = "none"; });
+}
+loadInstagram();
 
 // ============================================================================
-// CATÁLOGO
+// CATÁLOGO (datos desde data/products.json — se editan desde /admin)
 // ============================================================================
-var PRODUCTS = [
-  // MATES CLÁSICOS
-  { cat: "Mates Clásicos", img: "torpedo clasico.JPG", name: "Mate Torpedo Clásico", price: 42000, specs: "100% Calabaza · Virola de Alpaca Cincelada · Cuero Liso · Negro" },
-  { cat: "Mates Clásicos", img: "imperial clasico.JPG", name: "Mate Imperial Clásico", price: 39800, specs: "100% Calabaza · Fleje de acero · Virola de Alpaca · Cuero Liso · Negro" },
-  { cat: "Mates Clásicos", img: "imperial crudo.JPG", name: "Mate Imperial Crudo", price: 59800, specs: "100% Calabaza · Virola de Alpaca · Cuero Liso · Crudo" },
-  { cat: "Mates Clásicos", img: "torpedo base bolita.JPG", name: "Torpedo con Base de Bolita", price: 72100, specs: "100% Calabaza · Virola de Alpaca Cincelada · Base de Alpaca · Cuero Liso · Negro" },
-  { cat: "Mates Clásicos", img: "mate criollo.JPG", name: "Mate Criollo", price: 20100, specs: "Calabaza · Base de cuero cosida a mano" },
-  { cat: "Mates Clásicos", img: "porito con base de cuero.JPG", name: "Torpedo Porito con Base de Cuero", price: 20100, specs: "Calabaza porito · Base de cuero" },
-  { cat: "Mates Clásicos", img: "galleta.JPG", name: "Mate Galleta", price: 35000, specs: "Calabaza galleta · Base de cuero con broches" },
-  { cat: "Mates Clásicos", img: "camionero mundial.JPG", name: "Camionero Edición Copa Mundial '26", price: 50000, specs: "Edición Argentina · Celeste y blanco con sol" },
-  { cat: "Mates Clásicos", img: "criollo diselo de autor.JPG", name: "Criollo Diseño de Autor", price: 45100, specs: "Calabaza · Base de cuero pintada a mano" },
-  { cat: "Mates Clásicos", img: "camionero clasico.JPG", name: "Mate Camionero Clásico", price: null, stock: "out", specs: "Calabaza · Virola de alpaca · Base de cuero · Negro" },
-  // RANCHEROS
-  { cat: "Rancheros", img: "Sasha standar.JPG", name: "Ranchero Sasha Standar", price: 94000, specs: "Algarrobo Seleccionado · Color Natural · Clavos incrustados a mano" },
-  { cat: "Rancheros", img: "sasha un color.JPG", name: "Ranchero Sasha Cervantes · 1 Color", price: 94000, specs: "Algarrobo Seleccionado · Detalles premium" },
-  { cat: "Rancheros", img: "sasha 2 colores.JPG", name: "Ranchero Sasha Cervantes · 2 Colores", price: 94000, specs: "Algarrobo Seleccionado · Bicolor" },
-  { cat: "Rancheros", img: "sasah ranchero 2 colores.JPG", name: "Ranchero Sasha Cervantes · Celeste", price: 94000, specs: "Algarrobo Seleccionado · Tonos tierra y celeste" },
-  { cat: "Rancheros", img: "ranchero sasha.JPG", name: "Clásico Ranchero Sasha", price: null, stock: "out", specs: "Algarrobo Seleccionado · Multicolor · Detalles Premium" },
-  // BOMBILLAS (sin foto)
-  { cat: "Bombillas", name: "Chata Acero", price: 3900, specs: "Acero inoxidable" },
-  { cat: "Bombillas", name: "Pico de Loro Acero", price: 5500, specs: "Acero · filtro fino" },
-  { cat: "Bombillas", name: "Pico de Loro Pico Dorado", price: 6120, specs: "Acero · detalle dorado · 16/19cm" },
-  { cat: "Bombillas", name: "Pico de Loro Tirabuzón", price: 6620, specs: "Acero · 19cm" },
-  { cat: "Bombillas", name: "Pico de Loro Alpaca Standar", price: 25160, specs: "Alpaca · 19cm" },
-  { cat: "Bombillas", name: "Pico de Loro Premium", price: 46900, specs: "100% Alpaca · 19cm" },
-  // YERBA
-  { cat: "Yerba", img: "yerba sol y lluvia.JPG", name: "Yerba Sol y Lluvia", specs: "Yerba argentina · molienda equilibrada · perfil natural y rendidor", yerba: true,
-    sizes: [{ label: "500gr", price: 5000 }, { label: "1kg", price: 7500 }, { label: "2kg", price: 13000 }] },
-  // SETS
-  { cat: "Sets & Accesorios", img: "set matera.JPG", name: "Set Matera + Yerbero Edición Argentina", price: 68000, specs: "Bolso matero + yerbero bordados con sol argentino", set: true,
-    colors: ["Crudo", "Negro", "Albiceleste"] }
-];
+var PRODUCTS = [];
+var CATS = [];
+var state = { category: null, yerbaSize: 0, setColor: 0 };
 
-var CATS = ["Mates Clásicos", "Rancheros", "Bombillas", "Yerba", "Sets & Accesorios"];
-var state = { category: "Mates Clásicos", yerbaSize: 0, setColor: 0 };
+function loadCatalog() {
+  fetch("data/products.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (data) {
+    CATS = (data && data.categories) || [];
+    PRODUCTS = (data && data.products) || [];
+    if (!state.category || CATS.indexOf(state.category) < 0) state.category = CATS[0];
+    renderTabs();
+    renderProducts();
+  }).catch(function () {
+    document.getElementById("products").innerHTML = '<div style="grid-column:1/-1; text-align:center; color:rgba(36,22,16,0.6); padding:40px 0;">No se pudo cargar el catálogo.</div>';
+  });
+}
 
 function renderTabs() {
   var wrap = document.getElementById("tabs");
@@ -510,11 +504,10 @@ function stagger(nodes, step) {
 stagger(document.getElementById("features").children, 80);
 stagger(document.getElementById("testimonials").children, 90);
 
-// Dibuja el catálogo (sus tarjetas se marcan como reveal dentro de renderProducts)
-renderTabs();
-renderProducts();
+// Carga el catálogo desde data/products.json (renderProducts marca sus tarjetas como reveal)
+loadCatalog();
 
-// Observa todo lo marcado como reveal
+// Observa lo marcado como reveal (secciones estáticas; los productos se observan al renderizar)
 observeReveals();
 
 // Efectos de scroll (rAF para fluidez; sólo translate en el fondo, sin re-escalar el video)
