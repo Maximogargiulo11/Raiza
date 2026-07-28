@@ -62,11 +62,11 @@
 </head>
 <body>
 
-<div id="app" style="position: relative; min-height: 100vh; width: 100%; overflow-x: hidden; background: #2E1D12; font-family: 'Sanchez', sans-serif; color: #EDE4D6;">
+<div id="app" style="position: relative; min-height: 100vh; width: 100%; overflow-x: hidden; background: #1B0F0A; font-family: 'Sanchez', sans-serif; color: #EDE4D6;">
 
   <!-- FIXED WOOD BACKGROUND -->
   <div style="position: fixed; inset: 0; z-index: 0; overflow: hidden;">
-    <div id="bg" data-bg style="position: absolute; inset: -8%; will-change: transform;">
+    <div id="bg" data-bg style="position: absolute; inset: -12%; will-change: transform;">
       <video autoplay muted loop playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
         <source src="uploads/Steam_rising_from_antique_kettle_202607281850.mp4" type="video/mp4">
       </video>
@@ -521,7 +521,12 @@ function onScroll() {
   navEl.style.webkitBackdropFilter = on ? "blur(12px)" : "none";
   navEl.style.borderBottomColor = on ? "rgba(237,228,214,0.1)" : "rgba(237,228,214,0)";
   if (reduce) return;
-  if (bgEl) bgEl.style.transform = "translate3d(0," + (-y * 0.05).toFixed(1) + "px,0)";
+  if (bgEl) {
+    // parallax acotado: nunca supera el margen del video (inset -12%) -> sin franja
+    var docH = document.documentElement.scrollHeight;
+    var prog = Math.min(Math.max(y / (docH - vh || 1), 0), 1);
+    bgEl.style.transform = "translate3d(0," + (-prog * vh * 0.07).toFixed(1) + "px,0)";
+  }
   if (heroEl && y < vh) {
     var p = y / vh;
     heroEl.style.opacity = String(1 - p * 0.75);
