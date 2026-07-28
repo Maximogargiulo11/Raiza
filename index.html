@@ -24,6 +24,7 @@
     src: url('fonts/Sanchez-Italic.ttf') format('truetype');
     font-display: swap;
   }
+  html { scroll-behavior: smooth; }
   html, body { margin: 0; padding: 0; background: #241610; }
   * { box-sizing: border-box; }
   a { color: #EDE4D6; text-decoration: none; }
@@ -33,8 +34,17 @@
   button { font-family: 'Sanchez', sans-serif; }
   @keyframes raiza-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
   @keyframes raiza-bounce { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(7px); opacity: 1; } }
+  /* reveal-on-scroll (se activa solo cuando hay JS) */
+  .reveal-on [data-reveal] {
+    opacity: 0; transform: translateY(32px); filter: blur(6px);
+    transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1), filter .8s cubic-bezier(.16,1,.3,1);
+    transition-delay: var(--rd, 0ms); will-change: opacity, transform;
+  }
+  .reveal-on [data-reveal].in { opacity: 1; transform: none; filter: blur(0); }
   @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
     [data-bg] { transform: none !important; }
+    .reveal-on [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   }
   /* image-slot placeholder (shown when a product photo file is not present yet) */
   .slot { position: absolute; inset: 0; overflow: hidden; }
@@ -58,7 +68,7 @@
   <div style="position: fixed; inset: 0; z-index: 0; overflow: hidden;">
     <div id="bg" data-bg style="position: absolute; inset: -8%; will-change: transform;">
       <video autoplay muted loop playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
-        <source src="uploads/Dark_wood_plank_texture_loop_202607281224.mp4" type="video/mp4">
+        <source src="uploads/Dark_wood_plank_texture_loop_202607281820.mp4" type="video/mp4">
       </video>
     </div>
     <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(36,22,16,0.68), rgba(36,22,16,0.92));"></div>
@@ -127,7 +137,7 @@
 
   <!-- POR QUÉ ELEGIRNOS -->
   <section style="background: #241610; padding: 100px 32px;">
-    <div data-reveal id="features" style="max-width: 84rem; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 20px;"></div>
+    <div id="features" style="max-width: 84rem; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 20px;"></div>
   </section>
 
   <!-- CATÁLOGO -->
@@ -138,13 +148,13 @@
         <h2 style="font-family: 'Sanchez', serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 5vw, 3.6rem); margin: 0;">Elegí tu ritual.</h2>
       </div>
       <div id="tabs" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 44px;"></div>
-      <div id="products" data-reveal style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 24px;"></div>
+      <div id="products" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 24px;"></div>
     </div>
   </section>
 
   <!-- TESTIMONIOS -->
   <section style="background: #241610; padding: 100px 32px;">
-    <div data-reveal id="testimonials" style="max-width: 84rem; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 22px;"></div>
+    <div id="testimonials" style="max-width: 84rem; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 22px;"></div>
   </section>
 
   <!-- INSTAGRAM / COMUNIDAD -->
@@ -379,7 +389,7 @@ function renderProducts() {
   wrap.innerHTML = "";
   PRODUCTS.filter(function (p) { return p.cat === state.category; }).forEach(function (p) {
     var hasImage = !!p.img;
-    var card = el("div", { style: "background: #EDE4D6; border: 1px solid rgba(36,22,16,0.1); border-radius: 18px; overflow: hidden; transition: transform 0.35s ease, box-shadow 0.35s ease; display: flex; flex-direction: column;" });
+    var card = el("div", { style: "background: #EDE4D6; border: 1px solid rgba(36,22,16,0.1); border-radius: 18px; overflow: hidden; transition: transform 0.35s ease, box-shadow 0.35s ease; display: flex; flex-direction: column; flex: 1;" });
     card.onmouseenter = function () { card.style.transform = "translateY(-6px)"; card.style.boxShadow = "0 24px 46px rgba(36,22,16,0.28)"; };
     card.onmouseleave = function () { card.style.transform = "translateY(0)"; card.style.boxShadow = "none"; };
 
@@ -441,9 +451,12 @@ function renderProducts() {
         optWrap.appendChild(b);
       });
     }
-    wrap.appendChild(card);
+    var cell = el("div", { style: "display: flex; flex-direction: column;" });
+    cell.appendChild(card);
+    wrap.appendChild(cell);
   });
-  setupReveals(prefersReduced());
+  stagger(wrap.children, 60);
+  observeReveals(wrap);
 }
 
 // ============================================================================
@@ -456,55 +469,57 @@ var navEl = document.getElementById("nav");
 var heroEl = document.getElementById("top");
 var bgEl = document.getElementById("bg");
 
-// hero staggered entrance
+// Activa el estado oculto del reveal (progressive enhancement: sin JS se ve todo)
+document.documentElement.classList.add("reveal-on");
+
+// Hero: entrada escalonada al cargar
 Array.prototype.forEach.call(root.querySelectorAll("[data-anim]"), function (e) {
   var i = parseInt(e.getAttribute("data-anim"), 10);
   e.style.opacity = "0"; e.style.transform = "translateY(24px)"; e.style.filter = "blur(4px)";
-  e.style.transition = "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.7s cubic-bezier(0.16,1,0.3,1)";
-  setTimeout(function () { e.style.opacity = "1"; e.style.transform = "translateY(0)"; e.style.filter = "blur(0)"; }, 200 + i * 150);
+  e.style.transition = "opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1), filter .7s cubic-bezier(.16,1,.3,1)";
+  setTimeout(function () { e.style.opacity = "1"; e.style.transform = "translateY(0)"; e.style.filter = "blur(0)"; }, 180 + i * 130);
 });
 
-// responsive nav links
+// Nav responsive
 function applyNav() { navWrap.style.display = window.innerWidth >= 880 ? "flex" : "none"; }
 applyNav();
 window.addEventListener("resize", applyNav);
 
-// reveal-on-scroll
-var io;
-function setupReveals(reduced) {
-  if (io) io.disconnect();
-  var reveals = Array.prototype.slice.call(root.querySelectorAll("[data-reveal]"));
-  reveals.forEach(function (e) {
-    if (e._revealed) return;
-    if (reduced) { e._revealed = true; return; }
-    e.style.opacity = "0"; e.style.transform = "translateY(24px)"; e.style.filter = "blur(4px)";
-    e.style.transition = "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.7s cubic-bezier(0.16,1,0.3,1)";
+// Reveal-on-scroll: un IntersectionObserver global; cada objeto entra con fade-up
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (en) {
+    if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
   });
-  if (reduced) return;
-  io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (en.isIntersecting) {
-        en.target.style.opacity = "1";
-        en.target.style.transform = "translateY(var(--drift, 0px))";
-        en.target.style.transition = "opacity 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.7s cubic-bezier(0.16,1,0.3,1)";
-        en.target.style.filter = "blur(0)";
-        en.target._revealed = true;
-        io.unobserve(en.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -100px 0px" });
-  reveals.forEach(function (e) { if (!e._revealed) io.observe(e); });
+}, { threshold: 0.15, rootMargin: "0px 0px -80px 0px" });
+
+function observeReveals(scope) {
+  Array.prototype.forEach.call((scope || root).querySelectorAll("[data-reveal]:not(.in)"), function (e) {
+    if (reduce) e.classList.add("in"); else io.observe(e);
+  });
 }
 
-// Ahora que root, io y setupReveals están definidos, dibujamos el catálogo
-// y activamos el reveal-on-scroll para todas las secciones.
+// Marca los hijos de una grilla como reveals escalonados (aparecen de a uno)
+function stagger(nodes, step) {
+  Array.prototype.forEach.call(nodes, function (e, i) {
+    e.setAttribute("data-reveal", "");
+    e.style.setProperty("--rd", (i * (step || 70)) + "ms");
+  });
+}
+
+// Objetos que aparecen escalonados: features y testimonios
+stagger(document.getElementById("features").children, 80);
+stagger(document.getElementById("testimonials").children, 90);
+
+// Dibuja el catálogo (sus tarjetas se marcan como reveal dentro de renderProducts)
 renderTabs();
 renderProducts();
-setupReveals(reduce);
 
-// scroll effects
+// Observa todo lo marcado como reveal
+observeReveals();
+
+// Efectos de scroll (rAF para fluidez; sólo translate en el fondo, sin re-escalar el video)
 var parallax = Array.prototype.slice.call(root.querySelectorAll("[data-parallax]"));
-var drift = Array.prototype.slice.call(root.querySelectorAll("[data-reveal]"));
+var ticking = false;
 function onScroll() {
   var y = window.scrollY, vh = window.innerHeight;
   var on = y > vh * 0.7;
@@ -513,27 +528,22 @@ function onScroll() {
   navEl.style.webkitBackdropFilter = on ? "blur(12px)" : "none";
   navEl.style.borderBottomColor = on ? "rgba(237,228,214,0.1)" : "rgba(237,228,214,0)";
   if (reduce) return;
-  var prog = Math.min(y / (document.documentElement.scrollHeight - vh || 1), 1);
-  if (bgEl) bgEl.style.transform = "translateY(" + (-y * 0.06).toFixed(1) + "px) scale(" + (1 + prog * 0.1).toFixed(3) + ")";
+  if (bgEl) bgEl.style.transform = "translate3d(0," + (-y * 0.05).toFixed(1) + "px,0)";
   if (heroEl && y < vh) {
     var p = y / vh;
-    heroEl.style.opacity = String(1 - p * 0.8);
-    heroEl.style.transform = "scale(" + (1 - p * 0.05).toFixed(3) + ")";
+    heroEl.style.opacity = String(1 - p * 0.75);
+    heroEl.style.transform = "translateY(" + (y * 0.1).toFixed(1) + "px)";
   }
-  parallax.forEach(function (e) {
-    var r = e.getBoundingClientRect();
+  for (var k = 0; k < parallax.length; k++) {
+    var el2 = parallax[k], r = el2.getBoundingClientRect();
     var pr = (vh - r.top) / (vh + r.height);
-    e.style.transform = "translateY(" + ((pr - 0.5) * 40).toFixed(1) + "px)";
-  });
-  drift.forEach(function (e, i) {
-    if (!e._revealed) return;
-    var r = e.getBoundingClientRect();
-    var pr = (vh - r.top) / (vh + r.height);
-    var dir = i % 2 === 0 ? 1 : -1;
-    e.style.setProperty("--drift", ((0.5 - pr) * 26 * dir).toFixed(1) + "px");
-  });
+    el2.style.transform = "translate3d(0," + ((pr - 0.5) * 34).toFixed(1) + "px,0)";
+  }
 }
-window.addEventListener("scroll", onScroll, { passive: true });
+function onScrollRAF() {
+  if (!ticking) { ticking = true; requestAnimationFrame(function () { onScroll(); ticking = false; }); }
+}
+window.addEventListener("scroll", onScrollRAF, { passive: true });
 onScroll();
 </script>
 </body>
