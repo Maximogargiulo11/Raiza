@@ -40,6 +40,8 @@
   .slot { position: absolute; inset: 0; overflow: hidden; }
   .slot img { width: 100%; height: 100%; object-fit: cover; }
   .slot img.contain { object-fit: contain; }
+  .slot.logo-slot { overflow: visible; }
+  .slot img.logo { padding: 4%; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35)); }
   .slot .ph { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center;
     text-align: center; padding: 18px; gap: 10px; background:
       radial-gradient(120% 120% at 50% 0%, rgba(237,228,214,0.10), transparent 60%), #C2B4A0; color: #4A3016; }
@@ -68,8 +70,8 @@
   <nav id="nav" style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease; border-bottom: 1px solid rgba(237,228,214,0); background: rgba(36,22,16,0);">
     <div style="max-width: 84rem; margin: 0 auto; padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px;">
       <a href="#top" style="display: flex; align-items: center; gap: 12px;">
-        <div style="width: 44px; height: 44px; border-radius: 12px; overflow: hidden; flex: none; background: #241610; box-shadow: 0 0 0 1px rgba(237,228,214,0.15); position: relative;">
-          <span class="slot"><img class="contain" src="uploads/logo-1785205984582.JPG" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>Raiza</span></span></span>
+        <div style="width: 46px; height: 46px; overflow: visible; flex: none; position: relative;">
+          <span class="slot logo-slot"><img class="contain logo" src="uploads/logo.png" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>Raiza</span></span></span>
         </div>
         <span style="font-family: 'Sanchez', serif; font-size: 19px; color: #EDE4D6; letter-spacing: 0.01em;">Raiza</span>
       </a>
@@ -85,8 +87,8 @@
   <section id="top" style="position: relative; min-height: 100vh; display: flex; align-items: flex-end; overflow: hidden;">
     <div style="max-width: 42rem; padding: 128px 32px 80px; width: 100%;">
       <div data-anim="0" style="display: inline-block;">
-        <div style="width: 112px; height: 112px; border-radius: 20px; overflow: hidden; background: #241610; box-shadow: 0 0 0 1px rgba(237,228,214,0.18), 0 20px 50px rgba(0,0,0,0.4); animation: raiza-float 4s ease-in-out infinite; position: relative;">
-          <span class="slot"><img class="contain" src="uploads/logo-1785205984582.JPG" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>Raiza</span></span></span>
+        <div style="width: 118px; height: 118px; overflow: visible; animation: raiza-float 4s ease-in-out infinite; position: relative;">
+          <span class="slot logo-slot"><img class="contain logo" src="uploads/logo.png" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>Raiza</span></span></span>
         </div>
       </div>
       <h1 data-anim="1" style="font-family: 'Sanchez', serif; font-weight: 400; font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -0.01em; color: #EDE4D6; margin: 28px 0 0;">No vendemos mates,<br><span style="background: linear-gradient(135deg, #B9A78E, #8A5A34); -webkit-background-clip: text; background-clip: text; color: transparent; font-style: italic;">creamos rituales.</span></h1>
@@ -163,8 +165,8 @@
   <section id="contacto" style="background: #241610; padding: 128px 32px; position: relative; overflow: hidden;">
     <div style="position: absolute; inset: 0; background: radial-gradient(700px circle at 50% 0%, rgba(138,90,52,0.25), transparent 65%);"></div>
     <div data-reveal style="position: relative; max-width: 44rem; margin: 0 auto; text-align: center;">
-      <div style="width: 64px; height: 64px; border-radius: 14px; overflow: hidden; margin: 0 auto 24px; background: #241610; box-shadow: 0 0 0 1px rgba(237,228,214,0.18); position: relative;">
-        <span class="slot"><img class="contain" src="uploads/logo-1785205984582.JPG" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>Raiza</span></span></span>
+      <div style="width: 68px; height: 68px; overflow: visible; margin: 0 auto 24px; position: relative;">
+        <span class="slot logo-slot"><img class="contain logo" src="uploads/logo.png" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>Raiza</span></span></span>
       </div>
       <h2 style="font-family: 'Sanchez', serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 5vw, 3.5rem); color: #EDE4D6; margin: 0 0 14px;">¿Listo para tu próxima ronda?</h2>
       <p style="font-size: 17px; color: rgba(237,228,214,0.7); margin: 0 0 34px;">Escribinos y armamos tu mate ideal.</p>
@@ -179,8 +181,8 @@
   <footer style="background: #1B0F0A; border-top: 1px solid rgba(237,228,214,0.1); padding: 30px 28px;">
     <div style="max-width: 84rem; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px;">
       <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="width: 40px; height: 40px; border-radius: 10px; overflow: hidden; background: #241610; box-shadow: 0 0 0 1px rgba(237,228,214,0.15); position: relative;">
-          <span class="slot"><img class="contain" src="uploads/logo-1785205984582.JPG" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>R</span></span></span>
+        <div style="width: 42px; height: 42px; overflow: visible; position: relative;">
+          <span class="slot logo-slot"><img class="contain logo" src="uploads/logo.png" alt="Logo Raiza" onerror="this.parentNode.classList.add('empty')"><span class="ph"><span>R</span></span></span>
         </div>
         <span style="font-size: 13px; color: rgba(237,228,214,0.6);">© 2025 Raiza · Club de Mate</span>
       </div>
