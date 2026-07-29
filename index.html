@@ -58,6 +58,17 @@
   .slot .ph svg { opacity: 0.55; }
   .slot .ph span { font-family: 'Sanchez', serif; font-style: italic; font-size: 15px; line-height: 1.3; color: #4A3016; }
   .slot.empty .ph { display: flex; }
+  /* carrusel de productos por categoría */
+  #products { position: relative; }
+  .carousel-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; padding: 4px 2px 18px; scrollbar-width: none; }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-slide { flex: 0 0 auto; width: min(300px, 82vw); scroll-snap-align: start; display: flex; }
+  .carousel-arrow { position: absolute; top: 42%; transform: translateY(-50%); z-index: 5; width: 46px; height: 46px; border-radius: 9999px; border: 0; cursor: pointer; background: rgba(28,17,11,0.78); color: #EDE4D6; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: 0 6px 18px rgba(0,0,0,0.4); transition: opacity .25s ease, background .2s ease; }
+  .carousel-arrow:hover { background: #8A5A34; }
+  .carousel-arrow.prev { left: -8px; }
+  .carousel-arrow.next { right: -8px; }
+  .carousel-arrow[disabled] { opacity: 0; pointer-events: none; }
+  @media (max-width: 640px) { .carousel-arrow { display: none; } }
 </style>
 </head>
 <body>
@@ -148,7 +159,7 @@
         <h2 style="font-family: 'Sanchez', serif; font-style: italic; font-weight: 400; font-size: clamp(2rem, 5vw, 3.6rem); margin: 0;">Elegí tu ritual.</h2>
       </div>
       <div id="tabs" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 44px;"></div>
-      <div id="products" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 24px;"></div>
+      <div id="products" data-reveal style="position: relative;"></div>
     </div>
   </section>
 
@@ -381,7 +392,10 @@ function renderTabs() {
 function renderProducts() {
   var wrap = document.getElementById("products");
   wrap.innerHTML = "";
-  PRODUCTS.filter(function (p) { return p.cat === state.category; }).forEach(function (p) {
+  var items = PRODUCTS.filter(function (p) { return p.cat === state.category; });
+  if (!items.length) { wrap.innerHTML = '<p style="text-align:center; color:rgba(237,228,214,0.6); padding:20px 0;">Sin productos en esta categoría.</p>'; return; }
+  var track = el("div", { "class": "carousel-track" });
+  items.forEach(function (p) {
     var hasImage = !!p.img;
     var card = el("div", { style: "background: #EDE4D6; border: 1px solid rgba(36,22,16,0.1); border-radius: 18px; overflow: hidden; transition: transform 0.35s ease, box-shadow 0.35s ease; display: flex; flex-direction: column; flex: 1;" });
     card.onmouseenter = function () { card.style.transform = "translateY(-6px)"; card.style.boxShadow = "0 24px 46px rgba(36,22,16,0.28)"; };
@@ -445,12 +459,30 @@ function renderProducts() {
         optWrap.appendChild(b);
       });
     }
-    var cell = el("div", { style: "display: flex; flex-direction: column;" });
-    cell.appendChild(card);
-    wrap.appendChild(cell);
+    var slide = el("div", { "class": "carousel-slide" });
+    slide.appendChild(card);
+    track.appendChild(slide);
   });
-  stagger(wrap.children, 60);
-  observeReveals(wrap);
+
+  // Flechas del carrusel (visibles en desktop; en mobile se usa swipe)
+  var chevron = function (d) { return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="' + (d < 0 ? "M15 18l-6-6 6-6" : "M9 6l6 6-6 6") + '"/></svg>'; };
+  var prev = el("button", { "class": "carousel-arrow prev", "aria-label": "Anterior" }, chevron(-1));
+  var next = el("button", { "class": "carousel-arrow next", "aria-label": "Siguiente" }, chevron(1));
+  wrap.appendChild(prev);
+  wrap.appendChild(track);
+  wrap.appendChild(next);
+
+  function updateArrows() {
+    var max = track.scrollWidth - track.clientWidth - 4;
+    prev.disabled = track.scrollLeft <= 4;
+    next.disabled = track.scrollLeft >= max || max <= 0;
+  }
+  function step(dir) { track.scrollBy({ left: dir * Math.max(track.clientWidth * 0.85, 260), behavior: "smooth" }); }
+  prev.onclick = function () { step(-1); };
+  next.onclick = function () { step(1); };
+  track.addEventListener("scroll", function () { requestAnimationFrame(updateArrows); }, { passive: true });
+  window.addEventListener("resize", updateArrows);
+  setTimeout(updateArrows, 60);
 }
 
 // ============================================================================
