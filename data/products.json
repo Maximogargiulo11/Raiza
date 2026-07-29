@@ -10,7 +10,7 @@
     {
       "id": "p1",
       "cat": "Mates Clásicos",
-      "img": "mate-torpedo-clasico-1785282339436.jpg",
+      "img": "mate-torpedo-clasico-1785360424424.jpg",
       "name": "Mate Torpedo Clásico",
       "price": 42000,
       "specs": "100% Calabaza · Virola de Alpaca Cincelada · Cuero Liso · Negro"
@@ -18,7 +18,7 @@
     {
       "id": "p2",
       "cat": "Mates Clásicos",
-      "img": "imperial clasico.JPG",
+      "img": "mate-imperial-clasico-1785360431904.jpg",
       "name": "Mate Imperial Clásico",
       "price": 39800,
       "specs": "100% Calabaza · Fleje de acero · Virola de Alpaca · Cuero Liso · Negro"
@@ -26,7 +26,7 @@
     {
       "id": "p3",
       "cat": "Mates Clásicos",
-      "img": "imperial crudo.JPG",
+      "img": "mate-imperial-crudo-1785360446080.jpg",
       "name": "Mate Imperial Crudo",
       "price": 59800,
       "specs": "100% Calabaza · Virola de Alpaca · Cuero Liso · Crudo"
@@ -34,7 +34,7 @@
     {
       "id": "p4",
       "cat": "Mates Clásicos",
-      "img": "torpedo base bolita.JPG",
+      "img": "torpedo-con-base-de-bolita-1785360460735.jpg",
       "name": "Torpedo con Base de Bolita",
       "price": 72100,
       "specs": "100% Calabaza · Virola de Alpaca Cincelada · Base de Alpaca · Cuero Liso · Negro"
@@ -42,7 +42,7 @@
     {
       "id": "p5",
       "cat": "Mates Clásicos",
-      "img": "mate criollo.JPG",
+      "img": "mate-criollo-1785360477927.jpg",
       "name": "Mate Criollo",
       "price": 20100,
       "specs": "Calabaza · Base de cuero cosida a mano"
@@ -50,7 +50,7 @@
     {
       "id": "p6",
       "cat": "Mates Clásicos",
-      "img": "porito con base de cuero.JPG",
+      "img": "torpedo-porito-con-base-de-cuero-1785360487359.jpg",
       "name": "Torpedo Porito con Base de Cuero",
       "price": 20100,
       "specs": "Calabaza porito · Base de cuero"
