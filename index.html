@@ -81,9 +81,9 @@
 
   <!-- FIXED WOOD BACKGROUND -->
   <div style="position: fixed; inset: 0; z-index: 0; overflow: hidden;">
-    <div id="bg" data-bg style="position: absolute; inset: -12%; will-change: transform;">
-      <video autoplay muted loop playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
-        <source src="uploads/Dark_wood_plank_texture_loop_202607290902.mp4" type="video/mp4">
+    <div id="bg" data-bg style="position: absolute; inset: -12%; will-change: transform; background: #241610 url('uploads/bg-poster.jpg') center/cover no-repeat;">
+      <video autoplay muted loop playsinline preload="auto" poster="uploads/bg-poster.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease;" onloadeddata="this.style.opacity=1" oncanplay="this.style.opacity=1">
+        <source src="uploads/bg-wood.mp4" type="video/mp4">
       </video>
     </div>
     <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(36,22,16,0.68), rgba(36,22,16,0.80));"></div>
