@@ -28,16 +28,18 @@
       "cat": "Mates Clásicos",
       "img": "mate-imperial-crudo-1785360446080.jpg",
       "name": "Mate Imperial Crudo",
-      "price": 59800,
-      "specs": "100% Calabaza · Virola de Alpaca · Cuero Liso · Crudo"
+      "price": null,
+      "specs": "100% Calabaza · Virola de Alpaca · Cuero Liso · Crudo",
+      "stock": "out"
     },
     {
       "id": "p4",
       "cat": "Mates Clásicos",
       "img": "torpedo-con-base-de-bolita-1785360460735.jpg",
       "name": "Torpedo con Base de Bolita",
-      "price": 72100,
-      "specs": "100% Calabaza · Virola de Alpaca Cincelada · Base de Alpaca · Cuero Liso · Negro"
+      "price": null,
+      "specs": "100% Calabaza · Virola de Alpaca Cincelada · Base de Alpaca · Cuero Liso · Negro",
+      "stock": "out"
     },
     {
       "id": "p5",
@@ -56,126 +58,18 @@
       "specs": "Calabaza porito · Base de cuero"
     },
     {
-      "id": "p7",
-      "cat": "Mates Clásicos",
-      "img": "galleta.JPG",
-      "name": "Mate Galleta",
-      "price": 35000,
-      "specs": "Calabaza galleta · Base de cuero con broches"
-    },
-    {
-      "id": "p8",
-      "cat": "Mates Clásicos",
-      "img": "camionero mundial.JPG",
-      "name": "Camionero Edición Copa Mundial '26",
-      "price": 50000,
-      "specs": "Edición Argentina · Celeste y blanco con sol"
-    },
-    {
-      "id": "p9",
-      "cat": "Mates Clásicos",
-      "img": "criollo diselo de autor.JPG",
-      "name": "Criollo Diseño de Autor",
-      "price": 45100,
-      "specs": "Calabaza · Base de cuero pintada a mano"
-    },
-    {
-      "id": "p10",
-      "cat": "Mates Clásicos",
-      "img": "camionero clasico.JPG",
-      "name": "Mate Camionero Clásico",
-      "price": null,
-      "stock": "out",
-      "specs": "Calabaza · Virola de alpaca · Base de cuero · Negro"
-    },
-    {
-      "id": "p11",
-      "cat": "Rancheros",
-      "img": "Sasha standar.JPG",
-      "name": "Ranchero Sasha Standar",
-      "price": 94000,
-      "specs": "Algarrobo Seleccionado · Color Natural · Clavos incrustados a mano"
-    },
-    {
-      "id": "p12",
-      "cat": "Rancheros",
-      "img": "sasha un color.JPG",
-      "name": "Ranchero Sasha Cervantes · 1 Color",
-      "price": 94000,
-      "specs": "Algarrobo Seleccionado · Detalles premium"
-    },
-    {
-      "id": "p13",
-      "cat": "Rancheros",
-      "img": "sasha 2 colores.JPG",
-      "name": "Ranchero Sasha Cervantes · 2 Colores",
-      "price": 94000,
-      "specs": "Algarrobo Seleccionado · Bicolor"
-    },
-    {
-      "id": "p14",
-      "cat": "Rancheros",
-      "img": "sasah ranchero 2 colores.JPG",
-      "name": "Ranchero Sasha Cervantes · Celeste",
-      "price": 94000,
-      "specs": "Algarrobo Seleccionado · Tonos tierra y celeste"
-    },
-    {
       "id": "p15",
       "cat": "Rancheros",
-      "img": "ranchero sasha.JPG",
-      "name": "Clásico Ranchero Sasha",
-      "price": null,
-      "stock": "out",
-      "specs": "Algarrobo Seleccionado · Multicolor · Detalles Premium"
-    },
-    {
-      "id": "p16",
-      "cat": "Bombillas",
-      "name": "Chata Acero",
-      "price": 3900,
-      "specs": "Acero inoxidable"
-    },
-    {
-      "id": "p17",
-      "cat": "Bombillas",
-      "name": "Pico de Loro Acero",
-      "price": 5500,
-      "specs": "Acero · filtro fino"
-    },
-    {
-      "id": "p18",
-      "cat": "Bombillas",
-      "name": "Pico de Loro Pico Dorado",
-      "price": 6120,
-      "specs": "Acero · detalle dorado · 16/19cm"
-    },
-    {
-      "id": "p19",
-      "cat": "Bombillas",
-      "name": "Pico de Loro Tirabuzón",
-      "price": 6620,
-      "specs": "Acero · 19cm"
-    },
-    {
-      "id": "p20",
-      "cat": "Bombillas",
-      "name": "Pico de Loro Alpaca Standar",
-      "price": 25160,
-      "specs": "Alpaca · 19cm"
-    },
-    {
-      "id": "p21",
-      "cat": "Bombillas",
-      "name": "Pico de Loro Premium",
-      "price": 46900,
-      "specs": "100% Alpaca · 19cm"
+      "img": "clasico-ranchero-sasha-1785538824194.jpeg",
+      "name": "Ranchero standar",
+      "price": 94000,
+      "specs": ""
     },
     {
       "id": "p22",
       "cat": "Yerba",
-      "img": "yerba sol y lluvia.JPG",
-      "name": "Yerba Sol y Lluvia",
+      "img": "yerba-sol-y-lluvia-2-kg-1785538943501.jpeg",
+      "name": "Yerba Sol y Lluvia 2 kg",
       "specs": "Yerba argentina · molienda equilibrada · perfil natural y rendidor",
       "yerba": true,
       "sizes": [
@@ -196,7 +90,7 @@
     {
       "id": "p23",
       "cat": "Sets & Accesorios",
-      "img": "set matera.JPG",
+      "img": "set-matera-yerbero-edicion-argentina-1785538974510.jpeg",
       "name": "Set Matera + Yerbero Edición Argentina",
       "price": 68000,
       "specs": "Bolso matero + yerbero bordados con sol argentino",
