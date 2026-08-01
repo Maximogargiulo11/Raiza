@@ -100,6 +100,14 @@
         "Negro",
         "Albiceleste"
       ]
+    },
+    {
+      "id": "p1785595169591",
+      "name": "Yerba Baldo",
+      "cat": "Mates Clásicos",
+      "specs": "Yerba Despalada 500grs",
+      "price": 8100,
+      "img": "yerba-baldo-1785595169594.png"
     }
   ]
 }
