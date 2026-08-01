@@ -172,6 +172,7 @@ var ig = { profile: "https://instagram.com/raizaclubdemate", posts: [] };
 var pendingImages = {};   // { "uploads/archivo.jpg": "<base64 sin prefijo>" }
 var dirty = false;
 var editingId = null;
+var loadedSha = { products: null, ig: null };   // sha de los archivos al abrir (para detectar pisado)
 
 // ---- helpers DOM ----
 function $(id) { return document.getElementById(id); }
@@ -214,6 +215,8 @@ function boot() {
   Promise.all([ghGetFile("data/products.json"), ghGetFile("data/instagram.json")]).then(function (res) {
     if (res[0] && res[0].json) { data = res[0].json; data.categories = data.categories || []; data.products = data.products || []; }
     if (res[1] && res[1].json) { ig = res[1].json; ig.posts = ig.posts || []; }
+    loadedSha.products = res[0] ? res[0].sha : null;
+    loadedSha.ig = res[1] ? res[1].sha : null;
     renderProducts();
     renderIg();
     setDirty(false);
@@ -368,10 +371,36 @@ $("add-ig").onclick = function () { ig.posts.push(""); renderIg(); setDirty(true
 // ============================================================================
 function b64utf8(str) { return btoa(unescape(encodeURIComponent(str))); }
 
+function currentSha(path) {
+  // sha actual del archivo en el repo (o null si no existe); evita cache con &t
+  return gh("GET", "/contents/" + path + "?ref=" + BRANCH + "&t=" + Date.now())
+    .then(function (r) { return r.sha; })
+    .catch(function (e) { if (String(e.message).indexOf("404") === 0) return null; throw e; });
+}
+
 $("save-btn").onclick = function () {
   // limpiar posts vacíos
   ig.posts = ig.posts.filter(function (u) { return u && u.trim(); });
   var btn = $("save-btn"); btn.disabled = true;
+  setStatus("Verificando cambios remotos…");
+  // Protección anti-pisado: si los datos cambiaron desde que abriste el panel
+  // (otra pestaña, otro dispositivo, o un guardado anterior), no sobrescribas.
+  Promise.all([currentSha("data/products.json"), currentSha("data/instagram.json")]).then(function (shas) {
+    var changed = (loadedSha.products && shas[0] && shas[0] !== loadedSha.products) ||
+                  (loadedSha.ig && shas[1] && shas[1] !== loadedSha.ig);
+    if (changed) {
+      btn.disabled = false;
+      setStatus("⚠ Los datos cambiaron en el sitio desde que abriste el panel (otra pestaña o dispositivo). Recargá la página para no pisar esos cambios, y volvé a aplicar lo tuyo.", "err");
+      return;
+    }
+    doSave(btn);
+  }).catch(function (e) {
+    btn.disabled = false;
+    setStatus("Error al verificar: " + e.message, "err");
+  });
+};
+
+function doSave(btn) {
   setStatus("Guardando… no cierres la página.");
   var files = [
     { path: "data/products.json", content: JSON.stringify(data, null, 2) + "\n", encoding: "utf-8" },
@@ -395,15 +424,19 @@ $("save-btn").onclick = function () {
     .then(function (commit) { return gh("PATCH", "/git/refs/heads/" + BRANCH, { sha: commit.sha }); })
     .then(function () {
       pendingImages = {};
-      btn.disabled = false;
-      setStatus("✓ Guardado. Vercel va a republicar en ~30s.", "ok");
       dirty = false;
+      // resincronizar los sha para que un próximo guardado no dé falsa alarma
+      return Promise.all([currentSha("data/products.json"), currentSha("data/instagram.json")]).then(function (shas) {
+        loadedSha.products = shas[0]; loadedSha.ig = shas[1];
+        btn.disabled = false;
+        setStatus("✓ Guardado. Vercel va a republicar en ~30s.", "ok");
+      });
     })
     .catch(function (e) {
       btn.disabled = false;
       setStatus("Error al guardar: " + e.message, "err");
     });
-};
+}
 
 $("discard-btn").onclick = function () { if (dirty && !confirm("¿Descartar los cambios sin guardar?")) return; pendingImages = {}; boot(); };
 
