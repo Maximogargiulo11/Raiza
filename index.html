@@ -375,8 +375,11 @@ var state = { category: null, yerbaSize: 0, setColor: 0 };
 
 function loadCatalog() {
   fetch("data/products.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (data) {
-    CATS = (data && data.categories) || [];
     PRODUCTS = (data && data.products) || [];
+    // solo categorías que tienen al menos un producto (evita pestañas vacías)
+    CATS = ((data && data.categories) || []).filter(function (c) {
+      return PRODUCTS.some(function (p) { return p.cat === c; });
+    });
     if (!state.category || CATS.indexOf(state.category) < 0) state.category = CATS[0];
     renderTabs();
     renderProducts();
