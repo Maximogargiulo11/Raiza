@@ -24,24 +24,6 @@
       "specs": "100% Calabaza · Fleje de acero · Virola de Alpaca · Cuero Liso · Negro"
     },
     {
-      "id": "p3",
-      "cat": "Mates Clásicos",
-      "img": "mate-imperial-crudo-1785360446080.jpg",
-      "name": "Mate Imperial Crudo",
-      "price": null,
-      "specs": "100% Calabaza · Virola de Alpaca · Cuero Liso · Crudo",
-      "stock": "out"
-    },
-    {
-      "id": "p4",
-      "cat": "Mates Clásicos",
-      "img": "torpedo-con-base-de-bolita-1785360460735.jpg",
-      "name": "Torpedo con Base de Bolita",
-      "price": null,
-      "specs": "100% Calabaza · Virola de Alpaca Cincelada · Base de Alpaca · Cuero Liso · Negro",
-      "stock": "out"
-    },
-    {
       "id": "p5",
       "cat": "Mates Clásicos",
       "img": "mate-criollo-1785360477927.jpg",
@@ -132,14 +114,6 @@
       "specs": "Yerba Despalada - Compuesta Hierbas",
       "price": 8500,
       "img": "yerba-canarias-serena-1785596844808.png"
-    },
-    {
-      "id": "p1785768936454",
-      "name": "Mate Rojo",
-      "cat": "Yerba",
-      "specs": "",
-      "price": 5200,
-      "img": "mate-rojo-1785768936455.png"
     }
   ]
 }
