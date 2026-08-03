@@ -132,6 +132,14 @@
       "specs": "Yerba Despalada - Compuesta Hierbas",
       "price": 8500,
       "img": "yerba-canarias-serena-1785596844808.png"
+    },
+    {
+      "id": "p1785768936454",
+      "name": "Mate Rojo",
+      "cat": "Yerba",
+      "specs": "",
+      "price": 5200,
+      "img": "mate-rojo-1785768936455.png"
     }
   ]
 }
