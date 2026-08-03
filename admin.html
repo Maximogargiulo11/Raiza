@@ -296,23 +296,9 @@ function openForm(id) {
   var prev = $("f-preview");
   if (p && p.img) { var pend = pendingImages["uploads/" + p.img]; prev.onerror = function () { this.style.display = "none"; }; prev.src = pend ? pend.url : "/uploads/" + encodeURIComponent(p.img); prev.style.display = "block"; }
   else { prev.style.display = "none"; prev.src = ""; }
-  // productos con variantes: precio/stock se manejan por variante abajo
-  var hasVariants = p && (p.sizes || p.colors || p.yerba || p.set);
-  if (hasVariants) {
-    if (p.sizes) {
-      editVariantKind = "sizes";
-      editVariants = p.sizes.map(function (s) { return { label: s.label, price: (s.price != null ? s.price : null), out: !!s.out }; });
-    } else {
-      editVariantKind = "colors";
-      editVariants = (p.colors || []).map(function (c) { return (typeof c === "string") ? { label: c, out: false } : { label: c.label, out: !!c.out }; });
-    }
-    $("variant-kind").textContent = editVariantKind === "sizes" ? "tamaños" : "colores";
-    renderVariantRows();
-  } else { editVariants = null; editVariantKind = null; }
-  $("variant-editor").style.display = hasVariants ? "block" : "none";
-  $("variant-note").style.display = hasVariants ? "block" : "none";
-  $("price-stock-row").style.display = hasVariants ? "none" : "grid";
-  if (hasVariants) $("variant-note").innerHTML = "Este producto tiene <b>variantes</b>. Editá nombre, categoría, descripción y foto arriba; y el precio/stock de cada variante abajo.";
+  // editor de variantes: se arma según el producto y su categoría (Yerba = 3 tamaños)
+  editVariants = null; editVariantKind = null;
+  refreshVariantEditor();
   $("modal").classList.add("open");
   $("f-name").focus();
 }
@@ -341,13 +327,55 @@ function renderVariantRows() {
     box.appendChild(row);
   });
 }
+var STD_SIZES = ["500gr", "1kg", "2kg"];
+function getProduct(id) { return data.products.filter(function (x) { return x.id === id; })[0]; }
+function currentFormCat() { var c = $("f-cat").value; if (c === "__new__") c = $("f-newcat").value.trim(); return c; }
+
+// Decide qué editor de variantes mostrar según el producto y la categoría elegida.
+// Yerba => tamaños (500gr/1kg/2kg). Set (colores) => colores. Otras => sin variantes.
+function refreshVariantEditor() {
+  var p = editingId ? getProduct(editingId) : null;
+  var cat = currentFormCat();
+  var kind = null;
+  if (p && (p.set || p.colors)) kind = "colors";
+  else if (cat === "Yerba" || (p && (p.yerba || p.sizes))) kind = "sizes";
+
+  if (kind !== editVariantKind) {
+    editVariantKind = kind;
+    if (kind === "sizes") {
+      if (p && p.sizes && p.sizes.length) {
+        editVariants = p.sizes.map(function (s) { return { label: s.label, price: (s.price != null ? s.price : null), out: !!s.out }; });
+      } else {
+        // yerba sin variantes aún: 3 tamaños estándar; 500gr con el precio actual (si había) y en stock
+        editVariants = STD_SIZES.map(function (lbl, i) { return { label: lbl, price: (i === 0 && p && p.price != null ? p.price : null), out: i !== 0 }; });
+      }
+    } else if (kind === "colors") {
+      editVariants = (p.colors || []).map(function (c) { return (typeof c === "string") ? { label: c, out: false } : { label: c.label, out: !!c.out }; });
+    } else {
+      editVariants = null;
+    }
+  }
+
+  var has = kind !== null;
+  if (kind === "sizes") $("variant-kind").textContent = "tamaños";
+  else if (kind === "colors") $("variant-kind").textContent = "colores";
+  if (has) renderVariantRows();
+  $("variant-editor").style.display = has ? "block" : "none";
+  $("variant-note").style.display = has ? "block" : "none";
+  $("price-stock-row").style.display = has ? "none" : "grid";
+  if (has) $("variant-note").innerHTML = (kind === "sizes")
+    ? "Producto de <b>Yerba</b>: definí el precio y el stock de cada tamaño (500gr, 1kg, 2kg). Marcá “Sin stock” las que no tengas."
+    : "Este producto tiene <b>variantes de color</b>. Marcá el stock de cada una.";
+}
+
 $("variant-add").onclick = function () {
   if (!editVariants) return;
   editVariants.push(editVariantKind === "sizes" ? { label: "", price: null, out: false } : { label: "", out: false });
   renderVariantRows(); setDirty(true);
 };
 
-$("f-cat").onchange = toggleNewCat;
+$("f-cat").onchange = function () { toggleNewCat(); refreshVariantEditor(); };
+$("f-newcat").oninput = refreshVariantEditor;
 $("f-photo").onchange = function () {
   var file = this.files[0];
   if (!file) return;
@@ -362,23 +390,27 @@ $("modal-save").onclick = function () {
   var cat = $("f-cat").value;
   if (cat === "__new__") { cat = $("f-newcat").value.trim(); if (!cat) { alert("Escribí la nueva categoría."); return; } if (data.categories.indexOf(cat) < 0) data.categories.push(cat); }
   var p = editingId ? data.products.filter(function (x) { return x.id === editingId; })[0] : { id: "p" + Date.now() };
-  var hasVariants = p && (p.sizes || p.colors || p.yerba || p.set);
   p.name = name;
   p.cat = cat;
   p.specs = $("f-specs").value.trim();
-  if (!hasVariants) {
+  if (editVariantKind === "sizes") {
+    var cs = editVariants.filter(function (v) { return v.label && v.label.trim(); });
+    if (!cs.length) { alert("Dejá al menos un tamaño con nombre."); return; }
+    p.yerba = true;
+    p.sizes = cs.map(function (v) { var o = { label: v.label.trim(), price: (v.price == null ? 0 : v.price) }; if (v.out) o.out = true; return o; });
+    delete p.price; delete p.stock; delete p.set; delete p.colors;
+  } else if (editVariantKind === "colors") {
+    var cc = editVariants.filter(function (v) { return v.label && v.label.trim(); });
+    if (!cc.length) { alert("Dejá al menos un color con nombre."); return; }
+    p.set = true;
+    p.colors = cc.map(function (v) { return v.out ? { label: v.label.trim(), out: true } : v.label.trim(); });
+    delete p.yerba; delete p.sizes;   // el set conserva su precio base (p.price)
+  } else {
     p.stock = $("f-stock").value;
     if (p.stock === "out") { p.price = null; }
     else { var pr = parseInt($("f-price").value, 10); p.price = isNaN(pr) ? null : pr; }
     if (p.stock === "in") delete p.stock;   // "in" es el default, no hace falta guardarlo
-  } else if (editVariants) {
-    var clean = editVariants.filter(function (v) { return v.label && v.label.trim(); });
-    if (!clean.length) { alert("Dejá al menos una variante con nombre."); return; }
-    if (editVariantKind === "sizes") {
-      p.sizes = clean.map(function (v) { var o = { label: v.label.trim(), price: (v.price == null ? 0 : v.price) }; if (v.out) o.out = true; return o; });
-    } else {
-      p.colors = clean.map(function (v) { return v.out ? { label: v.label.trim(), out: true } : v.label.trim(); });
-    }
+    delete p.yerba; delete p.sizes; delete p.set; delete p.colors;
   }
   // foto nueva
   var file = $("f-photo").files[0];

@@ -88,32 +88,96 @@
       "name": "Yerba Baldo",
       "cat": "Yerba",
       "specs": "Yerba Despalada 500grs",
-      "price": 8100,
-      "img": "yerba-baldo-1785595169594.png"
+      "img": "yerba-baldo-1785595169594.png",
+      "yerba": true,
+      "sizes": [
+        {
+          "label": "500gr",
+          "price": 8100
+        },
+        {
+          "label": "1kg",
+          "price": 0,
+          "out": true
+        },
+        {
+          "label": "2kg",
+          "price": 0,
+          "out": true
+        }
+      ]
     },
     {
       "id": "p1785596192844",
       "name": "Yerba Canarias Tradicional",
       "cat": "Yerba",
       "specs": "Yerba Despalada",
-      "price": 7900,
-      "img": "yerba-canarias-tradicional-1785596192847.png"
+      "img": "yerba-canarias-tradicional-1785596192847.png",
+      "yerba": true,
+      "sizes": [
+        {
+          "label": "500gr",
+          "price": 7900
+        },
+        {
+          "label": "1kg",
+          "price": 0,
+          "out": true
+        },
+        {
+          "label": "2kg",
+          "price": 0,
+          "out": true
+        }
+      ]
     },
     {
       "id": "p1785596749521",
       "name": "Yerba Canarias Edicion Especial",
       "cat": "Yerba",
       "specs": "Yerba Despalada - Seleccion Especial",
-      "price": 9100,
-      "img": "yerba-canarias-edicion-especial-1785596749527.png"
+      "img": "yerba-canarias-edicion-especial-1785596749527.png",
+      "yerba": true,
+      "sizes": [
+        {
+          "label": "500gr",
+          "price": 9100
+        },
+        {
+          "label": "1kg",
+          "price": 0,
+          "out": true
+        },
+        {
+          "label": "2kg",
+          "price": 0,
+          "out": true
+        }
+      ]
     },
     {
       "id": "p1785596844808",
       "name": "Yerba Canarias Serena",
       "cat": "Yerba",
       "specs": "Yerba Despalada - Compuesta Hierbas",
-      "price": 8500,
-      "img": "yerba-canarias-serena-1785596844808.png"
+      "img": "yerba-canarias-serena-1785596844808.png",
+      "yerba": true,
+      "sizes": [
+        {
+          "label": "500gr",
+          "price": 8500
+        },
+        {
+          "label": "1kg",
+          "price": 0,
+          "out": true
+        },
+        {
+          "label": "2kg",
+          "price": 0,
+          "out": true
+        }
+      ]
     }
   ]
 }
