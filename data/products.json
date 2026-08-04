@@ -79,8 +79,14 @@
       "set": true,
       "colors": [
         "Crudo",
-        "Negro",
-        "Albiceleste"
+        {
+          "label": "Negro",
+          "out": true
+        },
+        {
+          "label": "Albiceleste",
+          "out": true
+        }
       ]
     },
     {
