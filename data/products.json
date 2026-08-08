@@ -32,14 +32,6 @@
       "specs": "Calabaza · Base de cuero cosida a mano"
     },
     {
-      "id": "p6",
-      "cat": "Mates Clásicos",
-      "img": "torpedo-porito-con-base-de-cuero-1785360487359.jpg",
-      "name": "Torpedo Porito con Base de Cuero",
-      "price": 20100,
-      "specs": "Calabaza porito · Base de cuero"
-    },
-    {
       "id": "p15",
       "cat": "Rancheros",
       "img": "clasico-ranchero-sasha-1785538824194.jpeg",
@@ -184,6 +176,38 @@
           "out": true
         }
       ]
+    },
+    {
+      "id": "p1786147386133",
+      "name": "Mate Criollo con Virola",
+      "cat": "Mates Clásicos",
+      "specs": "100% calabaza - Virola de Acero",
+      "price": 38000,
+      "img": "mate-criollo-con-virola-1786147386135.png"
+    },
+    {
+      "id": "p1786147480860",
+      "name": "Mate Torpedo Especial",
+      "cat": "Mates Clásicos",
+      "specs": "Virola Cincelada - Cuero Marron Labrado",
+      "price": 66800,
+      "img": "mate-torpedo-especial-1786147480861.png"
+    },
+    {
+      "id": "p1786147535577",
+      "name": "Matera Clasica",
+      "cat": "Sets & Accesorios",
+      "specs": "Color Negro - Ecocuero",
+      "price": 20000,
+      "img": "matera-clasica-1786147535577.png"
+    },
+    {
+      "id": "p1786147616268",
+      "name": "Yerbera Sol de Mayo",
+      "cat": "Sets & Accesorios",
+      "specs": "Cuero - Interior forrado",
+      "price": 17000,
+      "img": "yerbera-sol-de-mayo-1786147616268.png"
     }
   ]
 }
