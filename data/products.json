@@ -67,18 +67,10 @@
       "img": "set-matera-yerbero-edicion-argentina-1785597017276.png",
       "name": "Set Matera + Yerbero Edición Argentina",
       "price": 68000,
-      "specs": "Bolso matero + yerbero bordados con sol argentino",
+      "specs": "Bolso matero + yerbero bordados con sol de mayo",
       "set": true,
       "colors": [
-        "Crudo",
-        {
-          "label": "Negro",
-          "out": true
-        },
-        {
-          "label": "Albiceleste",
-          "out": true
-        }
+        "Crudo"
       ]
     },
     {
@@ -208,6 +200,14 @@
       "specs": "Cuero - Interior forrado",
       "price": 17000,
       "img": "yerbera-sol-de-mayo-1786147616268.png"
+    },
+    {
+      "id": "p1786148206627",
+      "name": "Set Matera + Yerbero Edición Argentina",
+      "cat": "Mates Clásicos",
+      "specs": "Bolso matero + yerbero bordados con sol argentino",
+      "price": 68000,
+      "img": "set-matera-yerbero-edicion-argentina-1786148206630.png"
     }
   ]
 }
